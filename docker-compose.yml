@@ -2,19 +2,46 @@ version: "3"
 services:
   card-churning-service:
     build: "./card-churning-service"
+    container_name: card-churning-service
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_HOSTNAME=db
+      - MONGO_PORT=$MONGO_PORT
+      - MONGO_DB=$MONGO_DB
+    ports:
+      - "80:8080"
     depends_on:
       - mongo-db
     volumes:
       - ./card-churning-service:/opt/app
+    networks:
+      - app-network
+    # command: ./wait-for.sh mongo-db:27017 -- yarn watch
 
   mongo-db:
-    image: mongo
-    restart: always
+    image: mongo:4.2.3
+    container_name: mongodb
+    restart: unless-stopped
+    env_file: .env
     ports:
       - "27017:27017"
-    # environment:
-    #   MONGO_INITDB_ROOT_USERNAME: root
-    #   MONGO_INITIDB_ROOT_PASSWORD: example
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
   #   users-service:
   #     build: "./users-service"
   #     depends_on:
