@@ -1,3 +1,11 @@
-import path from "path";
+require("dotenv").config;
 
-console.log("working");
+const express = require("express"),
+  app = express(),
+  port = process.env.PORT || 8080;
+
+app.use(require("./routes.js"));
+
+app.listen(port, () => {
+  console.log(`Card churning service listening on port ${port}`);
+});
