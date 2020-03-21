@@ -1,7 +1,7 @@
 const mongoose = require("mongoose"),
   Schema = mongoose.Schema;
 
-const creditCardSchema = new Schema({
+const cardSchema = new Schema({
   vendor: {
     type: String,
     enum: ["Visa", "American Express", "Master Card", "Discover"]
@@ -14,4 +14,4 @@ const creditCardSchema = new Schema({
   bonusCategories: Array
 });
 
-module.exports = mongoose.model("CreditCard", creditCardSchema);
+module.exports = mongoose.model("Card", cardSchema);

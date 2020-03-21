@@ -1,7 +1,8 @@
 const express = require("express"),
   router = express.Router(),
-  mainController = require("./controllers/main.controller");
+  cardsController = require("./controllers/cards.controller");
 
 module.exports = router;
 
-router.get("/", mainController.showHome);
+//Credit Cards
+router.get("/cards", cardsController.getAllCards);
