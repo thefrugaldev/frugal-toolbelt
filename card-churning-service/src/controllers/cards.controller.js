@@ -11,6 +11,13 @@ const getAllCardsAsync = async (req, res) => {
   });
 };
 
+const getCardByIdAsync = async (req, res) => {
+  const card = await Card.findById(req.params.id);
+
+  res.send(card);
+};
+
 module.exports = {
-  getAllCards: getAllCardsAsync
+  getAllCardsAsync,
+  getCardByIdAsync
 };

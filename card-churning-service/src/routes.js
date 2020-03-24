@@ -4,5 +4,8 @@ const express = require("express"),
 
 module.exports = router;
 
+//TODO: Implement handler for errors
+
 //Credit Cards
-router.get("/cards", cardsController.getAllCards);
+router.get("/cards", cardsController.getAllCardsAsync);
+router.get("/cards/:id", cardsController.getCardByIdAsync);
