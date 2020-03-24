@@ -1,12 +1,7 @@
+import CardChurningService from "#root/adapters/card-churning-service";
+
 const cardsResolver = async () => {
-  return [
-    {
-      id: 1,
-      vendor: "MasterCard",
-      bank: "Republic",
-      name: "Savings Plus"
-    }
-  ];
+  return await CardChurningService.fetchAllCards();
 };
 
 export default cardsResolver;

@@ -2,9 +2,9 @@ import { gql } from "apollo-server";
 
 const typeDefs = gql`
   type Card {
-    id: ID!
+    _id: ID!
     vendor: String!
-    bank: String!
+    bank: String
     name: String!
   }
 
