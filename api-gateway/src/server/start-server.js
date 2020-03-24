@@ -4,12 +4,14 @@ import cors from "cors";
 import express from "express";
 import resolvers from "#root/graphql/resolvers";
 import typeDefs from "#root/graphql/type-defs";
+import formatGraphQLErrors from "#root/helpers/error-handlers";
 
 require("dotenv").config();
 
 const port = process.env.PORT || 8000;
 
 const apolloServer = new ApolloServer({
+  formatError: formatGraphQLErrors,
   resolvers,
   typeDefs
 });
