@@ -19,4 +19,4 @@ mongoose
 mongoose.Promise = global.Promise;
 
 // Import models
-require("./src/models/Card");
+require("../src/models/Card");

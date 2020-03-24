@@ -14,4 +14,7 @@ const cardSchema = new Schema({
   bonusCategories: Array
 });
 
+//TODO: Add createdAt, updatedAt, deletedAt (allowNull)
+//TODO: Set charset to UTF-8? Emoji support
+
 module.exports = mongoose.model("Card", cardSchema);
