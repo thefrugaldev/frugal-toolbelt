@@ -1,6 +1,16 @@
 const mongoose = require("mongoose");
 const Card = mongoose.model("Card");
 
+// POST
+const createCardAsync = async (req, res) => {
+  const card = new Card(req.body);
+
+  await card.save();
+
+  res.send(card);
+};
+
+// GET
 const getAllCardsAsync = async (req, res) => {
   await Card.find({}, (err, cards) => {
     if (err) {
@@ -18,6 +28,7 @@ const getCardByIdAsync = async (req, res) => {
 };
 
 module.exports = {
+  createCardAsync,
   getAllCardsAsync,
   getCardByIdAsync
 };

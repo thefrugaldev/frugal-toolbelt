@@ -1,13 +1,16 @@
 require("dotenv").config();
+const bodyParser = require("body-parser");
 import "../db/db";
 
 import express from "express";
 const app = express(),
   port = process.env.PORT || 8080;
 
-app.use(require("./routes.js"));
+//TODO: do we need cookie-parser, or cors libraries
 
-//TODO: do we need cookie-parser, body-parser, or cors libraries
+app.use(bodyParser.json());
+
+app.use(require("./routes.js"));
 
 app.listen(port, () => {
   console.log(`Card churning service listening on port ${port}`);

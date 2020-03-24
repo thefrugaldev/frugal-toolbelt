@@ -9,3 +9,4 @@ module.exports = router;
 //Credit Cards
 router.get("/cards", cardsController.getAllCardsAsync);
 router.get("/cards/:id", cardsController.getCardByIdAsync);
+router.post("/cards", cardsController.createCardAsync);

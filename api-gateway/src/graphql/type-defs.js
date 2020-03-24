@@ -8,6 +8,10 @@ const typeDefs = gql`
     name: String!
   }
 
+  type Mutation {
+    createCard(vendor: String!, bank: String, name: String!): Card!
+  }
+
   type Query {
     cards: [Card!]!
   }

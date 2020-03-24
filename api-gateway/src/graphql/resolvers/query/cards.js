@@ -1,7 +1,7 @@
 import CardChurningService from "#root/adapters/card-churning-service";
 
 const cardsResolver = async () => {
-  return await CardChurningService.fetchAllCards();
+  return await CardChurningService.fetchAllCardsAsync();
 };
 
 export default cardsResolver;
