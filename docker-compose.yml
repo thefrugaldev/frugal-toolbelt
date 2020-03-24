@@ -42,7 +42,7 @@ services:
       - MONGO_INITDB_DATABASE=$MONGO_DB
     volumes:
       - dbdata:/data/db
-      - ./card-churning-service/db/seed-mock-db.js:/docker-entrypoint-initdb.d/seed-mock-db.js:ro
+      - ./card-churning-service/src/db/seed-mock-db.js:/docker-entrypoint-initdb.d/seed-mock-db.js:ro
     networks:
       - app-network
 

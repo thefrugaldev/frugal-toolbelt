@@ -7,7 +7,10 @@ const cardSchema = new Schema({
     enum: ["Visa", "American Express", "Master Card", "Discover"]
   },
   bank: String,
-  name: String,
+  name: {
+    type: String,
+    unique: true
+  },
   applied: Date,
   approved: Date,
   // age of account: computed property
