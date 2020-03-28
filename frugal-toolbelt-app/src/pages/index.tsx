@@ -1,5 +1,6 @@
 import * as React from "react";
 import { NextPage } from "next";
+import Link from "next/link";
 import { useAuth0 } from "../lib/auth0-spa";
 import NavBar from "../components/NavBar";
 
@@ -13,7 +14,14 @@ const Page: NextPage<Props> = () => {
       <h1>Frugal Toolbelt Application</h1>
 
       <div>
-        <p>{user && user.nickname}</p>
+        {user && (
+          <div>
+            {user.nickname}{" "}
+            <Link href="/dashboard">
+              <a>Dashboard</a>
+            </Link>
+          </div>
+        )}
         <NavBar />
       </div>
     </div>
