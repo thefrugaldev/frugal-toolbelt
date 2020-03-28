@@ -2,6 +2,9 @@ import * as React from "react";
 import App from "next/app";
 import Head from "next/head";
 import { Auth0Provider } from "../lib/auth0-spa";
+import Navbar from "../components/navbar";
+//Styles
+import "bulma/css/bulma.css";
 
 export default class FrugalToolbeltApp extends App {
   render() {
@@ -25,7 +28,10 @@ export default class FrugalToolbeltApp extends App {
           redirectUri={"http://localhost:3000/callback"}
           onRedirectCallback={onRedirectCallback}
         >
-          <Component {...pageProps} router={router} />
+          <section>
+            <Navbar />
+            <Component {...pageProps} router={router} />
+          </section>
         </Auth0Provider>
       </>
     );
