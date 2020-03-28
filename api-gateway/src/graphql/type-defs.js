@@ -14,6 +14,7 @@ const typeDefs = gql`
 
   type Query {
     cards: [Card!]!
+    card(id: ID!): Card!
   }
 `;
 

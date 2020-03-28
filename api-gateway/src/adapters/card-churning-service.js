@@ -15,6 +15,19 @@ export default class CardChurningService {
     return body;
   }
 
+  static async fetchCardByIdAsync(id) {
+    const body = await axios
+      .get(`${CARD_CHURNING_SERVICE_URI}/cards/${id}`)
+      .then(res => {
+        return res.data;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+    return body;
+  }
+
   static async createCardAsync({ vendor, bank, name }) {
     const body = await axios
       .post(`${CARD_CHURNING_SERVICE_URI}/cards`, {
