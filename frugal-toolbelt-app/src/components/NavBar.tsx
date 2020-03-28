@@ -6,8 +6,6 @@ interface Props {}
 const NavBar: React.FunctionComponent<Props> = () => {
   const { isAuthenticated, loginWithRedirect, logout, loading } = useAuth0();
 
-  console.log(loading);
-
   return (
     <div>
       {!loading && !isAuthenticated && (

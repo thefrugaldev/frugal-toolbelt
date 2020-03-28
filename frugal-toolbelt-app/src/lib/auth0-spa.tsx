@@ -62,8 +62,6 @@ export const Auth0Provider: React.FunctionComponent<Auth0ProviderProps> = ({
 
       const isAuthenticated = await auth0FromHook.isAuthenticated();
 
-      console.log(`👻 🛡️ 👻 🛡️ 👻 🛡️ Is Authenticated: ${isAuthenticated}`);
-
       setIsAuthenticated(isAuthenticated);
 
       if (isAuthenticated) {
@@ -101,8 +99,6 @@ export const Auth0Provider: React.FunctionComponent<Auth0ProviderProps> = ({
     setIsAuthenticated(true);
     setUser(user);
   };
-
-  console.log(`👻 🛡️ 👻 🛡️ 👻 🛡️ Is Authenticated: ${isAuthenticated}`);
 
   return (
     <Auth0Context.Provider
