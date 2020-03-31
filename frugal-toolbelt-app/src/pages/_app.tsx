@@ -3,7 +3,7 @@ import App from "next/app";
 import Head from "next/head";
 import { ApolloProvider } from "react-apollo";
 import { Auth0Provider } from "../lib/auth0-spa";
-import Navbar from "../components/navbar";
+import Navbar from "../components/common/navbar";
 import graphqlClient from "../api/graphql-client";
 //Styles
 import "bulma/css/bulma.css";

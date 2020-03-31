@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import { useAuth0 } from "../lib/auth0-spa";
 //Components
-import Navbar from "../components/navbar";
+import Navbar from "../components/common/navbar";
 
 interface Props {}
 

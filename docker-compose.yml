@@ -19,17 +19,17 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      - MONGO_DB_URI=$MONGO_DB_URI
+      - MONGO_DB_URI=$CARD_CHURNING_DB_URI
     ports:
       - "8080:8080"
     depends_on:
-      - card-churning-db
+      - mongodb
     volumes:
       - ./card-churning-service:/opt/app
     networks:
       - app-network
 
-  card-churning-db:
+  mongodb:
     image: mongo:4.2.3
     container_name: mongodb
     restart: unless-stopped
@@ -39,12 +39,46 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
       - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
-      - MONGO_INITDB_DATABASE=$MONGO_DB
+      - MONGO_INITDB_DATABASE=admin
     volumes:
       - dbdata:/data/db
-      - ./card-churning-service/src/db/seed-mock-db.js:/docker-entrypoint-initdb.d/seed-mock-db.js:ro
+      - ./card-churning-service/src/db/seed-mock-db.js:/docker-entrypoint-initdb.d/seed-card-churning-db.js:ro
+      - ./budget-service/src/db/seed-mock-db.js:/docker-entrypoint-initdb.d/seed-budget-db.js:ro
     networks:
       - app-network
+
+  budget-service:
+    build: "./budget-service"
+    container_name: budget-service
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_DB_URI=$BUDGET_DB_URI
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
+    volumes:
+      - ./budget-service:/opt/app
+    networks:
+      - app-network
+
+  # budget-db:
+  #   image: mongo:4.2.3
+  #   container_name: budget-db
+  #   restart: unless-stopped
+  #   env_file: .env
+  #   ports:
+  #     - "27017:27017"
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+  #     - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+  #     # - MONGO_INITDB_DATABASE=$BUDGET_DB
+  #   volumes:
+  #     - dbdata:/data/db
+  #     - ./budget-service/src/db/seed-mock-db.js:/docker-entrypoint-initdb.d/seed-mock-db.js:ro
+  #   networks:
+  #     - app-network
 
 networks:
   app-network:

@@ -30,12 +30,12 @@ const Cards: React.FC<Props> = () => {
       <div className="columns">
         {cards.map(card => (
           <div className="column" key={card._id}>
-            <p className="card">
+            <div className="card">
               <h2>{card.vendor}</h2>
               <h2>
                 {card.bank}: {card.name}
               </h2>
-            </p>
+            </div>
           </div>
         ))}
       </div>

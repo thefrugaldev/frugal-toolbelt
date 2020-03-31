@@ -29,5 +29,6 @@ const mockCreditCards = [
   }
 ];
 
+db = db.getSiblingDB("card-churning");
 db.cards.drop();
 db.cards.insertMany(mockCreditCards);

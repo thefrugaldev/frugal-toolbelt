@@ -1,0 +1,22 @@
+{
+  "name": "budget-service",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "watch": "nodemon ./src/start-server.js --ignore public/",
+    "start": "concurrently \"yarn run watch\" \"yarn run assets\" --names \"💻,📦\" --prefix name",
+    "assets": "webpack -w --display-max-modules 0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.7"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2",
+    "webpack": "^4.42.1"
+  }
+}

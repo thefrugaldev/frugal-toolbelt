@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth0 } from "../lib/auth0-spa";
+import { useAuth0 } from "../../lib/auth0-spa";
 import Link from "next/link";
 
 interface Props {}
