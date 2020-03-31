@@ -1,8 +1,14 @@
+import express from "express";
+
 /*
 Try/Catch Errors Handler
 */
-const catchErrors = fn => {
-  return function(req, res, next) {
+export const catchErrors = (fn: any) => {
+  return (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
     return fn(req, res, next).catch(next);
   };
 };
@@ -10,9 +16,13 @@ const catchErrors = fn => {
 /*
 Not Found Error Handler
 */
-const notFoundErrors = (req, res, next) => {
+export const notFoundErrors = (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   const err = new Error("Not Found");
-  err.status = 404;
+  res.status(404);
 
   next(err);
 };
@@ -20,7 +30,12 @@ const notFoundErrors = (req, res, next) => {
 /*
 MongoDB Validation Error Handler
 */
-const flashValidationErrors = (err, req, res, next) => {
+export const flashValidationErrors = (
+  err: any,
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   if (!err.errors) return next(err);
 
   const errorKeys = Object.keys(err.errors);
@@ -31,7 +46,12 @@ const flashValidationErrors = (err, req, res, next) => {
 /*
 Development Error Handler
 */
-const developmentErrors = (err, req, res, next) => {
+export const developmentErrors = (
+  err: any,
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   err.stack = err.stack || "";
 
   const errorDetails = {
@@ -52,7 +72,12 @@ const developmentErrors = (err, req, res, next) => {
 /*
 Production Error Handler
 */
-const productionErrors = (err, req, res, next) => {
+export const productionErrors = (
+  err: any,
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   res.status(err.status || 500);
   res.send(err.message);
 };

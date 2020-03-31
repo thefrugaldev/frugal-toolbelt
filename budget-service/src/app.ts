@@ -1,13 +1,15 @@
-const express = require("express"),
-  cookieParser = require("cookie-parser"),
-  bodyParser = require("body-parser"),
-  routes = require("./routes"),
-  errorHandlers = require("./helpers/error-handlers");
+import express from "express";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
+import * as routes from "./routes";
+import * as db from "./db";
+// import errorHandlers from "./helpers/error-handlers";
 
 const app = express();
 const isDevelopment = app.get("env") === "development";
 
 if (isDevelopment) {
+  // tslint:disable-next-line:no-console
   console.log(
     `😨 🚧 😨 🚧 😨 🚧 😨 🚧 Working in development environment, proceed with caution `
   );
@@ -31,15 +33,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-//TODO: Use api prefix?
+db.intialize();
+
+// TODO: Use api prefix?
 // app.use("/api", routes);
-// app.use(routes);
+routes.register(app);
 
-app.use(errorHandlers.notFoundErrors);
-app.use(errorHandlers.flashValidationErrors);
+// app.use(errorHandlers.notFoundErrors);
+// app.use(errorHandlers.flashValidationErrors);
 
-if (isDevelopment) app.use(errorHandlers.developmentErrors);
+// if (isDevelopment) app.use(errorHandlers.developmentErrors);
 
-app.use(errorHandlers.productionErrors);
+// app.use(errorHandlers.productionErrors);
 
-module.exports = app;
+export { app };
