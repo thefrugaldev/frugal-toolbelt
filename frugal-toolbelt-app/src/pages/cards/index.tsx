@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth0, requireUser } from "../lib/auth0-spa";
+import { requireUser } from "../../lib/auth0-spa";
 
 interface Props {}
 

@@ -52,7 +52,9 @@ const Navbar: React.FunctionComponent<Props> = () => {
                   <a className="navbar-item">Credit Cards</a>
                 </Link>
                 <hr className="navbar-divider" />
-                <a className="navbar-item">Budget</a>
+                <Link href="/budget">
+                  <a className="navbar-item">Budget</a>
+                </Link>
                 <a className="navbar-item">Stock Market</a>
                 <a className="navbar-item">Calculators</a>
               </div>
