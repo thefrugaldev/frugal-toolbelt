@@ -1,8 +1,10 @@
 import * as React from "react";
 import App from "next/app";
 import Head from "next/head";
+import { ApolloProvider } from "react-apollo";
 import { Auth0Provider } from "../lib/auth0-spa";
 import Navbar from "../components/navbar";
+import graphqlClient from "../api/graphql-client";
 //Styles
 import "bulma/css/bulma.css";
 
@@ -18,7 +20,7 @@ export default class FrugalToolbeltApp extends App {
     };
 
     return (
-      <>
+      <ApolloProvider client={graphqlClient}>
         <Head>
           <title>Frugal Toolbelt Application</title>
         </Head>
@@ -33,7 +35,7 @@ export default class FrugalToolbeltApp extends App {
             <Component {...pageProps} router={router} />
           </section>
         </Auth0Provider>
-      </>
+      </ApolloProvider>
     );
   }
 }

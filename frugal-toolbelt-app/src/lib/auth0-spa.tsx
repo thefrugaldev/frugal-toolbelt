@@ -81,7 +81,7 @@ export const Auth0Provider: React.FunctionComponent<Auth0ProviderProps> = ({
     try {
       await auth0Client.loginWithPopup(params);
     } catch (error) {
-      console.log(`👻 🛡️ 👻 🛡️ 👻 🛡️ Error logging in with popup: ${error}`);
+      console.log(`👻 🛡️ 👻 🛡️ 👻 🛡️ → Error logging in with popup: ${error}`);
     } finally {
       setPopupOpen(false);
     }

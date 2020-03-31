@@ -10,10 +10,10 @@ const options = {
 mongoose
   .connect(MONGO_DB_URI, options)
   .then(function() {
-    console.log("👌 ✅ 👌 ✅ 👌 ✅ 👌 ✅ MongoDB is connected");
+    console.log("👌 ✅ 👌 ✅ 👌 ✅ 👌 ✅ → MongoDB is connected");
   })
   .catch(function(err) {
-    console.log(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 MongoDB could not connect: ${err}`);
+    console.log(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → MongoDB could not connect: ${err}`);
   });
 
 mongoose.Promise = global.Promise;
