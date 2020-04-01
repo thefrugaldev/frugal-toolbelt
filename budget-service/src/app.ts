@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import * as routes from "./routes";
 import * as db from "./db";
-// import errorHandlers from "./helpers/error-handlers";
+import * as errorHandlers from "./helpers/error-handlers";
 
 const app = express();
 const isDevelopment = app.get("env") === "development";
@@ -39,11 +39,11 @@ db.intialize();
 // app.use("/api", routes);
 routes.register(app);
 
-// app.use(errorHandlers.notFoundErrors);
-// app.use(errorHandlers.flashValidationErrors);
+app.use(errorHandlers.notFoundErrors);
+app.use(errorHandlers.flashValidationErrors);
 
-// if (isDevelopment) app.use(errorHandlers.developmentErrors);
+if (isDevelopment) app.use(errorHandlers.developmentErrors);
 
-// app.use(errorHandlers.productionErrors);
+app.use(errorHandlers.productionErrors);
 
 export { app };

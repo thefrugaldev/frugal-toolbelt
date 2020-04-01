@@ -1,5 +1,4 @@
 import mongoose, { Schema, Document } from "mongoose";
-// mongoose.Promise = global.Promise;
 
 export interface ICategory extends Document {
   name: string;
@@ -16,19 +15,3 @@ const CategorySchema: Schema = new Schema({
 });
 
 export default mongoose.model<ICategory>("Category", CategorySchema);
-
-// export const categorySchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     required: "Please provide a name for this category"
-//   },
-//   created: {
-//     type: Date,
-//     default: Date.now
-//   },
-//   icon: String,
-//   isActive: {
-//     type: Boolean,
-//     default: true
-//   }
-// });

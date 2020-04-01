@@ -6,34 +6,36 @@ import CategoryController from "./controllers/category-controller";
 export const register = (router: express.Application) => {
   // TODO: Add user authorization to controllers
 
-  //   //   Budgets
-  //   router.get("/line-items", catchErrors(LineItemController.getLineItemsAsync));
+  // Line Items
+  router.get("/line-items", catchErrors(LineItemController.getLineItemsAsync));
 
-  //   router.get(
-  //     "/line-items/:id",
-  //     catchErrors(LineItemController.getLineItemByIdAsync)
-  //   );
-  //   router.post(
-  //     "/line-items",
-  //     catchErrors(LineItemController.createLineItemAsync)
-  //   );
-  //   router.put(
-  //     "/line-items/:id",
-  //     catchErrors(LineItemController.updateLineItemAsync)
-  //   );
-  //   router.delete(
-  //     "/line-items/:id",
-  //     catchErrors(LineItemController.deleteLineItemAsync)
-  //   );
+  router.get(
+    "/line-items/:id",
+    catchErrors(LineItemController.getLineItemByIdAsync)
+  );
+  router.post(
+    "/line-items",
+    catchErrors(LineItemController.createLineItemAsync)
+  );
+  router.put(
+    "/line-items/:id",
+    catchErrors(LineItemController.updateLineItemAsync)
+  );
+  router.delete(
+    "/line-items/:id",
+    catchErrors(LineItemController.deleteLineItemAsync)
+  );
 
-  // // Categories
+  // Categories
   router.get("/categories", catchErrors(CategoryController.getCategoriesAsync));
-  //   router.post(
-  //     "/categories",
-  //     catchErrors(CategoryController.createCategoryAsync)
-  //   );
-  //   router.delete(
-  //     "/categories/:id",
-  //     catchErrors(CategoryController.deleteCategoryAsync)
-  //   );
+
+  router.post(
+    "/categories",
+    catchErrors(CategoryController.createCategoryAsync)
+  );
+
+  router.delete(
+    "/categories/:id",
+    catchErrors(CategoryController.deleteCategoryAsync)
+  );
 };
