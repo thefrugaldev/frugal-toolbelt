@@ -6,4 +6,4 @@ WORKDIR /opt/app
 
 RUN yarn
 
-CMD yarn watch
+CMD yarn run dev

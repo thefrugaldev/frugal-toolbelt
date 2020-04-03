@@ -63,23 +63,6 @@ services:
     networks:
       - app-network
 
-  # budget-db:
-  #   image: mongo:4.2.3
-  #   container_name: budget-db
-  #   restart: unless-stopped
-  #   env_file: .env
-  #   ports:
-  #     - "27017:27017"
-  #   environment:
-  #     - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
-  #     - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
-  #     # - MONGO_INITDB_DATABASE=$BUDGET_DB
-  #   volumes:
-  #     - dbdata:/data/db
-  #     - ./budget-service/src/db/seed-mock-db.js:/docker-entrypoint-initdb.d/seed-mock-db.js:ro
-  #   networks:
-  #     - app-network
-
 networks:
   app-network:
     driver: bridge
