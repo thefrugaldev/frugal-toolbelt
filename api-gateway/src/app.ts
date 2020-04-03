@@ -2,14 +2,13 @@ import { ApolloServer } from "apollo-server-express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import resolvers from "./graphql/resolvers/card-churning";
-import typeDefs from "./graphql/resolvers/card-churning/type-defs";
+import { schema } from "./graphql/schema";
 import formatGraphQLErrors from "./graphql/helpers/error-handlers";
 
 const apolloServer = new ApolloServer({
   formatError: formatGraphQLErrors,
-  resolvers,
-  typeDefs
+  // resolvers,
+  schema
 });
 
 const app = express();
