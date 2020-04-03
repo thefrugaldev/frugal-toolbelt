@@ -2,9 +2,9 @@ import { ApolloServer } from "apollo-server-express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import resolvers from "#root/graphql/resolvers";
-import typeDefs from "#root/graphql/type-defs";
-import formatGraphQLErrors from "#root/helpers/error-handlers";
+import resolvers from "./graphql/resolvers/card-churning";
+import typeDefs from "./graphql/resolvers/card-churning/type-defs";
+import formatGraphQLErrors from "./graphql/helpers/error-handlers";
 
 const apolloServer = new ApolloServer({
   formatError: formatGraphQLErrors,
@@ -14,9 +14,10 @@ const apolloServer = new ApolloServer({
 
 const app = express();
 const isDevelopment = app.get("env") === "development";
-let whitelist = []; //TODO: stub out as env variables
+const whitelist: string[] = []; // TODO: stub out as env variables
 
 if (isDevelopment) {
+  // tslint:disable-next-line:no-console
   console.log(
     `😨 🚧 😨 🚧 😨 🚧 😨 🚧 Working in development environment, proceed with caution `
   );
@@ -38,23 +39,8 @@ if (isDevelopment) {
       credentials: true
     })
   );
-
-  // app.use((req, res, next) => {
-  //   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  //   res.header("Access-Control-Allow-Credentials", "true");
-  //   res.header(
-  //     "Access-Control-Allow-Headers",
-  //     "Origin, X-Requested-With, Content-Type, Accept, authorization"
-  //   );
-  //   res.header(
-  //     "Access-Control-Allow-Methods",
-  //     "GET, POST, PATCH, PUT, DELETE, OPTIONS"
-  //   );
-
-  //   next();
-  // });
 }
 
 apolloServer.applyMiddleware({ app, cors: false, path: "/graphql" });
 
-module.exports = app;
+export default app;
