@@ -14,26 +14,32 @@ if (isDevelopment) {
     `😨 🚧 😨 🚧 😨 🚧 😨 🚧 Working in development environment, proceed with caution `
   );
 
-  app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, authorization"
-    );
-    res.header(
-      "Access-Control-Allow-Methods",
-      "GET, POST, OPTIONS, PUT, DELETE"
-    );
+  app.use(
+    (
+      req: express.Request,
+      res: express.Response,
+      next: express.NextFunction
+    ) => {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, authorization"
+      );
+      res.header(
+        "Access-Control-Allow-Methods",
+        "GET, POST, OPTIONS, PUT, DELETE"
+      );
 
-    next();
-  });
+      next();
+    }
+  );
 }
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-db.intialize();
+db.initialize();
 
 // TODO: Use api prefix?
 // app.use("/api", routes);

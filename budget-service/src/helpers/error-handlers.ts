@@ -1,5 +1,10 @@
 import express from "express";
 
+interface ICustomError extends Error {
+  status?: number;
+  errors?: any[];
+}
+
 /*
 Try/Catch Errors Handler
 */
@@ -21,8 +26,8 @@ export const notFoundErrors = (
   res: express.Response,
   next: express.NextFunction
 ) => {
-  const err = new Error("Not Found");
-  res.status(404);
+  const err: ICustomError = new Error("Not Found");
+  err.status = 404;
 
   next(err);
 };
@@ -31,7 +36,7 @@ export const notFoundErrors = (
 MongoDB Validation Error Handler
 */
 export const flashValidationErrors = (
-  err: any,
+  err: ICustomError,
   req: express.Request,
   res: express.Response,
   next: express.NextFunction
@@ -47,7 +52,7 @@ export const flashValidationErrors = (
 Development Error Handler
 */
 export const developmentErrors = (
-  err: any,
+  err: ICustomError,
   req: express.Request,
   res: express.Response,
   next: express.NextFunction
@@ -73,19 +78,11 @@ export const developmentErrors = (
 Production Error Handler
 */
 export const productionErrors = (
-  err: any,
+  err: ICustomError,
   req: express.Request,
   res: express.Response,
   next: express.NextFunction
 ) => {
   res.status(err.status || 500);
   res.send(err.message);
-};
-
-module.exports = {
-  catchErrors,
-  notFoundErrors,
-  flashValidationErrors,
-  developmentErrors,
-  productionErrors
 };

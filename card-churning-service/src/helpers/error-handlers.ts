@@ -1,8 +1,19 @@
+import express from "express";
+
+interface ICustomError extends Error {
+  status?: number;
+  errors?: any[];
+}
+
 /*
 Try/Catch Errors Handler
 */
-const catchErrors = fn => {
-  return function(req, res, next) {
+const catchErrors = (fn: any) => {
+  return (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
     return fn(req, res, next).catch(next);
   };
 };
@@ -10,8 +21,12 @@ const catchErrors = fn => {
 /*
 Not Found Error Handler
 */
-const notFoundErrors = (req, res, next) => {
-  const err = new Error("Not Found");
+const notFoundErrors = (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
+  const err: ICustomError = new Error("Not Found");
   err.status = 404;
 
   next(err);
@@ -20,7 +35,12 @@ const notFoundErrors = (req, res, next) => {
 /*
 MongoDB Validation Error Handler
 */
-const flashValidationErrors = (err, req, res, next) => {
+const flashValidationErrors = (
+  err: ICustomError,
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   if (!err.errors) return next(err);
 
   const errorKeys = Object.keys(err.errors);
@@ -31,7 +51,12 @@ const flashValidationErrors = (err, req, res, next) => {
 /*
 Development Error Handler
 */
-const developmentErrors = (err, req, res, next) => {
+const developmentErrors = (
+  err: ICustomError,
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   err.stack = err.stack || "";
 
   const errorDetails = {
@@ -52,12 +77,17 @@ const developmentErrors = (err, req, res, next) => {
 /*
 Production Error Handler
 */
-const productionErrors = (err, req, res, next) => {
+const productionErrors = (
+  err: ICustomError,
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
   res.status(err.status || 500);
   res.send(err.message);
 };
 
-module.exports = {
+export {
   catchErrors,
   notFoundErrors,
   flashValidationErrors,

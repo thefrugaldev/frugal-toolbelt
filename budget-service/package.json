@@ -7,10 +7,10 @@
     "clean": "rimraf dist/*",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "tsc": "tsc",
+    "start": "node .",
     "build": "npm-run-all clean lint tsc",
     "dev:start": "npm-run-all build start",
-    "dev": "nodemon --watch src --ext ts --exec yarn run dev:start",
-    "start": "node ."
+    "dev": "nodemon --watch src --ext ts --exec yarn run dev:start"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
