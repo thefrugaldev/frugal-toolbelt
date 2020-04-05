@@ -3,8 +3,6 @@ import { requireUser } from "../../lib/auth0-spa";
 import { monthNames } from "../../lib/datetime-helpers";
 import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
-// Interfaces
-import LineItem from "../../interfaces/LineItem";
 // Components
 import LineItemList from "../../components/budget/line-item-list";
 import BudgetPageFooter from "../../components/budget/footer";
@@ -14,10 +12,16 @@ const GET_LINE_ITEMS = gql`
     lineItems {
       _id
       title
-      #description
+      description
       isSavings
       amount
-      #categoryId
+      date
+      category {
+        _id
+        name
+        icon
+        isActive
+      }
     }
   }
 `;

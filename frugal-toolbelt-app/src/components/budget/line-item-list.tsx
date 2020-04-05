@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import LineItem from "../../interfaces/LineItem";
+import { getDisplayFormattedDate } from "../../lib/datetime-helpers";
 // Utils
 // import { getDisplayFormattedDate } from "../../utils/datetime-helpers";
 
@@ -77,10 +78,9 @@ const LineItemList: React.FC<Props> = ({ lineItems }) => {
                   </Link>
                 </td>
                 <td>
-                  No Category Specified
-                  {/* {lineItem.category
+                  {lineItem.category
                     ? lineItem.category.name
-                    : "No Category Specified"} */}
+                    : "No Category Specified"}
                 </td>
                 <td
                   className={
@@ -89,8 +89,7 @@ const LineItemList: React.FC<Props> = ({ lineItems }) => {
                 >
                   {lineItem.amount && `$${lineItem.amount}`}
                 </td>
-                {/* <td>{getDisplayFormattedDate(lineItem.date)}</td> */}
-                <td>lineItem.date</td>
+                <td>{getDisplayFormattedDate(lineItem.date)}</td>
                 <td>
                   {lineItem.description && (
                     <span className="icon has-text-info">

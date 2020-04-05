@@ -1,15 +1,20 @@
 import { gql } from "apollo-server";
+import { GraphQLScalarType } from "graphql";
+import { Kind } from "graphql/language";
 import ILineItem from "../interfaces/ILineItem";
 import LineItemService from "../adapters/line-item-service";
 
 export const typeDef = gql`
+  scalar Date
+
   type LineItem {
     _id: ID!
     title: String!
-    categoryId: Int!
+    category: Category
     description: String!
     amount: String!
     isSavings: Boolean
+    date: Date!
   }
 
   extend type Mutation {
@@ -40,5 +45,21 @@ export const resolvers = {
     createLineItem: async (obj: any, lineItem: ILineItem) => {
       return await LineItemService.createLineItemAsync(lineItem);
     }
-  }
+  },
+  Date: new GraphQLScalarType({
+    name: "Date",
+    description: "Date custom scalar type",
+    parseValue(value) {
+      return new Date(value); // value from the client
+    },
+    serialize(value) {
+      return new Date(value); // value sent to the client
+    },
+    parseLiteral(ast) {
+      if (ast.kind === Kind.INT) {
+        return new Date(ast.value); // ast value is always in string format
+      }
+      return null;
+    }
+  })
 };

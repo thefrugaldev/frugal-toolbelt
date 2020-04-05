@@ -1,8 +1,11 @@
+import Category from "./Category";
+
 export default interface LineItem {
   _id: string;
   title: string;
   description: string;
   isSavings: boolean;
   amount: number;
-  categoryId: string;
+  date: string;
+  category: Category;
 }
