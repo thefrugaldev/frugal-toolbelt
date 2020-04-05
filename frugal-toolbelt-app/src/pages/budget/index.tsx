@@ -1,16 +1,36 @@
 import React from "react";
 import { requireUser } from "../../lib/auth0-spa";
 import { monthNames } from "../../lib/datetime-helpers";
+import { useQuery } from "react-apollo";
+import gql from "graphql-tag";
+// Interfaces
+import LineItem from "../../interfaces/LineItem";
+// Components
+import LineItemList from "../../components/budget/line-item-list";
+import BudgetPageFooter from "../../components/budget/footer";
 
-interface Props {}
+const GET_LINE_ITEMS = gql`
+  query getLineItems {
+    lineItems {
+      _id
+      title
+      #description
+      isSavings
+      amount
+      #categoryId
+    }
+  }
+`;
 
-const Budget: React.FC<Props> = () => {
+const Budget: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = React.useState(
     new Date().getMonth() + 1
   );
   const [selectedYear, setSelectedYear] = React.useState(
     new Date().getFullYear()
   );
+
+  const { loading, error, data } = useQuery(GET_LINE_ITEMS);
 
   // React.useEffect(() => {
   //   loadLineItems({ month: selectedMonth, year: selectedYear }).catch(error => {
@@ -46,6 +66,17 @@ const Budget: React.FC<Props> = () => {
           ))}
         </ul>
       </div>
+      {!loading ? (
+        <>
+          <LineItemList
+            // onDeleteClick={handleDeleteBudgetAsync}
+            lineItems={data.lineItems}
+          />
+          <BudgetPageFooter />
+        </>
+      ) : (
+        <></>
+      )}
       {/* {loading ? (
           <Spinner />
         ) : lineItems.length ? (
