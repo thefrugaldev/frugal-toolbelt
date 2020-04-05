@@ -27,70 +27,70 @@ const lineItems: LineItem[] = [
     title: "LGE",
     description: "LGE Bill",
     isSavings: false,
-    amount: 130,
+    amount: 13000,
     date: new Date()
   },
   {
     title: "Louisville Water",
     description: "Water Bill",
     isSavings: false,
-    amount: 150,
+    amount: 15000,
     date: getPreviousDate(1)
   },
   {
     title: "Target",
     description: "New Shoes",
     isSavings: false,
-    amount: 85,
+    amount: 8500,
     date: new Date()
   },
   {
     title: "LGE",
     description: "LGE Bill",
     isSavings: false,
-    amount: 130,
+    amount: 13000,
     date: getPreviousDate(1)
   },
   {
     title: "Movie Theatre",
     description: "",
     isSavings: false,
-    amount: 15,
+    amount: 1500,
     date: new Date()
   },
   {
     title: "Red Lobster",
     description: "",
     isSavings: false,
-    amount: 75,
+    amount: 7500,
     date: new Date()
   },
   {
     title: "LGE",
     description: "LGE Bill",
     isSavings: false,
-    amount: 130,
+    amount: 13000,
     date: getPreviousDate(2)
   },
   {
     title: "Kroger",
     description: "",
     isSavings: false,
-    amount: 115,
+    amount: 11500,
     date: new Date()
   },
   {
     title: "Louisville Water",
     description: "Water Bill",
     isSavings: false,
-    amount: 150,
+    amount: 15000,
     date: getPreviousDate(3)
   },
   {
     title: "LGE",
     description: "LGE Bill",
     isSavings: false,
-    amount: 130,
+    amount: 13000,
     date: getPreviousDate(3)
   }
 ];

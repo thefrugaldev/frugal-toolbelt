@@ -8,7 +8,7 @@ export const typeDef = gql`
     title: String!
     categoryId: Int!
     description: String!
-    amount: Int!
+    amount: String!
     isSavings: Boolean
   }
 
