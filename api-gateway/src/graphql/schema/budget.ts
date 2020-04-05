@@ -23,11 +23,19 @@ export const typeDef = gql`
 
   extend type Query {
     lineItems: [LineItem!]!
+    lineItem(id: ID!): LineItem!
   }
 `;
 
 export const resolvers = {
-  Query: {},
+  Query: {
+    lineItems: async () => {
+      return await BudgetService.fetchLineItemsAsync();
+    },
+    lineItem: async (obj: any, lineItem: ILineItem) => {
+      return await BudgetService.fetchLineItemByIdAsync(lineItem.id);
+    }
+  },
   Mutation: {
     createLineItem: async (obj: any, lineItem: ILineItem) => {
       return await BudgetService.createLineItemAsync(lineItem);

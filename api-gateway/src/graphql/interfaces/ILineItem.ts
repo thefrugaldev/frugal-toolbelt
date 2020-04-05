@@ -1,4 +1,5 @@
 export default interface ILineItem {
+  id: string;
   title: string;
   description: string;
   isSavings: boolean;
