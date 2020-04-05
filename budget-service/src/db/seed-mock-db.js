@@ -70,7 +70,7 @@ const lineItems = [
     title: "LGE",
     description: "LGE Bill",
     isSavings: false,
-    amount: 130,
+    amount: 13000,
     date: new Date(),
     category: getCategoryIdByName("Electricity")
   },
@@ -78,7 +78,7 @@ const lineItems = [
     title: "Louisville Water",
     description: "Water Bill",
     isSavings: false,
-    amount: 150,
+    amount: 15000,
     date: getPreviousDate(1),
     category: getCategoryIdByName("Water")
   },
@@ -86,7 +86,7 @@ const lineItems = [
     title: "Target",
     description: "New Shoes",
     isSavings: false,
-    amount: 85,
+    amount: 8500,
     date: new Date(),
     category: getCategoryIdByName("Shopping")
   },
@@ -94,7 +94,7 @@ const lineItems = [
     title: "LGE",
     description: "LGE Bill",
     isSavings: false,
-    amount: 130,
+    amount: 13000,
     date: getPreviousDate(1),
     category: getCategoryIdByName("Electricity")
   },
@@ -102,7 +102,7 @@ const lineItems = [
     title: "Movie Theatre",
     description: "",
     isSavings: false,
-    amount: 15,
+    amount: 1500,
     date: new Date(),
     category: getCategoryIdByName("Entertainment")
   },
@@ -110,7 +110,7 @@ const lineItems = [
     title: "Red Lobster",
     description: "",
     isSavings: false,
-    amount: 75,
+    amount: 7500,
     date: new Date(),
     category: getCategoryIdByName("Eating Out")
   },
@@ -118,7 +118,7 @@ const lineItems = [
     title: "LGE",
     description: "LGE Bill",
     isSavings: false,
-    amount: 130,
+    amount: 13000,
     date: getPreviousDate(2),
     category: getCategoryIdByName("Electricity")
   },
@@ -126,7 +126,7 @@ const lineItems = [
     title: "Kroger",
     description: "",
     isSavings: false,
-    amount: 115,
+    amount: 11500,
     date: new Date(),
     category: getCategoryIdByName("Grocery")
   },
@@ -134,7 +134,7 @@ const lineItems = [
     title: "Louisville Water",
     description: "Water Bill",
     isSavings: false,
-    amount: 150,
+    amount: 15000,
     date: getPreviousDate(3),
     category: getCategoryIdByName("Water")
   },
@@ -142,7 +142,7 @@ const lineItems = [
     title: "LGE",
     description: "LGE Bill",
     isSavings: false,
-    amount: 130,
+    amount: 13000,
     date: getPreviousDate(3),
     category: getCategoryIdByName("Electricity")
   }
