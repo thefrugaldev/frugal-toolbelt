@@ -1,6 +1,6 @@
 import { gql } from "apollo-server";
 import ILineItem from "../interfaces/ILineItem";
-import BudgetService from "../adapters/budget-service";
+import LineItemService from "../adapters/line-item-service";
 
 export const typeDef = gql`
   type LineItem {
@@ -30,15 +30,15 @@ export const typeDef = gql`
 export const resolvers = {
   Query: {
     lineItems: async () => {
-      return await BudgetService.fetchLineItemsAsync();
+      return await LineItemService.fetchLineItemsAsync();
     },
     lineItem: async (obj: any, lineItem: ILineItem) => {
-      return await BudgetService.fetchLineItemByIdAsync(lineItem.id);
+      return await LineItemService.fetchLineItemByIdAsync(lineItem.id);
     }
   },
   Mutation: {
     createLineItem: async (obj: any, lineItem: ILineItem) => {
-      return await BudgetService.createLineItemAsync(lineItem);
+      return await LineItemService.createLineItemAsync(lineItem);
     }
   }
 };

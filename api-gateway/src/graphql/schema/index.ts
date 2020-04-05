@@ -1,4 +1,11 @@
-import { typeDef as Budget, resolvers as budgetResolvers } from "./budget";
+import {
+  typeDef as LineItem,
+  resolvers as lineItemResolvers
+} from "./line-item";
+import {
+  typeDef as Category,
+  resolvers as categoryResolvers
+} from "./category";
 import {
   typeDef as CardChurning,
   resolvers as cardChurningResolvers
@@ -21,6 +28,11 @@ const Mutation = gql`
 const resolvers = {};
 
 export const schema = makeExecutableSchema({
-  typeDefs: [Query, Mutation, Budget, CardChurning],
-  resolvers: merge(resolvers, budgetResolvers, cardChurningResolvers)
+  typeDefs: [Query, Mutation, LineItem, Category, CardChurning],
+  resolvers: merge(
+    resolvers,
+    lineItemResolvers,
+    categoryResolvers,
+    cardChurningResolvers
+  )
 });

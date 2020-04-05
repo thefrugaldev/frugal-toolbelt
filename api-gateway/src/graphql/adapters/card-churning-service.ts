@@ -12,7 +12,9 @@ export default class CardChurningService {
       })
       .catch(error => {
         // tslint:disable-next-line:no-console
-        console.error(`🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → ${error}`);
+        console.error(
+          `🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → Error fetching cards: ${error}`
+        );
       });
     return body;
   }
@@ -25,7 +27,9 @@ export default class CardChurningService {
       })
       .catch(error => {
         // tslint:disable-next-line:no-console
-        console.error(`🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → ${error}`);
+        console.error(
+          `🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → Error fetching card ${id}: ${error}`
+        );
       });
 
     return body;
@@ -39,7 +43,9 @@ export default class CardChurningService {
       })
       .catch(error => {
         // tslint:disable-next-line:no-console
-        console.error(`🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → ${error}`);
+        console.error(
+          `🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → Error creating cards: ${error}`
+        );
       });
 
     return body;

@@ -6,7 +6,8 @@ const getCategoriesAsync = async (
   req: express.Request,
   res: express.Response
 ) => {
-  const categories = await Category.find({ isActive: true });
+  // const categories = await Category.find({ isActive: true });
+  const categories = await Category.find({});
 
   res.send(categories);
 };

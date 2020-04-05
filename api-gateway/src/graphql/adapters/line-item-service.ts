@@ -3,7 +3,7 @@ import ILineItem from "../interfaces/ILineItem";
 
 const BUDGET_SERVICE_URI = "http://budget-service:8081";
 
-export default class BudgetService {
+export default class LineItemService {
   static async fetchLineItemsAsync() {
     const body = await axios
       .get(`${BUDGET_SERVICE_URI}/line-items`)
@@ -12,7 +12,9 @@ export default class BudgetService {
       })
       .catch(error => {
         // tslint:disable-next-line:no-console
-        console.error(`🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → ${error}`);
+        console.error(
+          `🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → Error fetching line items: ${error}`
+        );
       });
 
     return body;
@@ -26,7 +28,9 @@ export default class BudgetService {
       })
       .catch(error => {
         // tslint:disable-next-line:no-console
-        console.error(`🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → ${error}`);
+        console.error(
+          `🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → Error fetching line item ${id}: ${error}`
+        );
       });
 
     return body;
@@ -40,7 +44,9 @@ export default class BudgetService {
       })
       .catch(error => {
         // tslint:disable-next-line:no-console
-        console.error(`🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → ${error}`);
+        console.error(
+          `🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → Error creating line item: ${error}`
+        );
       });
 
     return body;
