@@ -1,4 +1,17 @@
-const getPreviousDate = (day = 0, month = 0, year = 0) => {
+import { Card } from "../models/Card";
+
+/*
+///////////////////////////////
+USED AS REFERENCE FOR TYPECHECKING ONLY
+ACTUAL SEED DATA LIVES IN seed-mock-db.js FILE
+///////////////////////////////
+*/
+
+const getPreviousDate = (
+  day: number = 0,
+  month: number = 0,
+  year: number = 0
+) => {
   const date = new Date();
 
   if (day > 0) {
@@ -16,7 +29,7 @@ const getPreviousDate = (day = 0, month = 0, year = 0) => {
   return date;
 };
 
-const mockCreditCards = [
+const cards: Card[] = [
   {
     vendor: "Visa",
     bank: "Chase",
@@ -54,10 +67,3 @@ const mockCreditCards = [
     approved: getPreviousDate(2, 0, 1)
   }
 ];
-
-// tslint:disable-next-line:no-console
-print(`🌷 💧 🌷 💧 🌷 💧 🌷 💧 Seeding card-churning service database`);
-
-db = db.getSiblingDB("card-churning");
-db.cards.drop();
-db.cards.insertMany(mockCreditCards);

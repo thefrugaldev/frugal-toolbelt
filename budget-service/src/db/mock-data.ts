@@ -1,4 +1,14 @@
-const getPreviousDate = (month = 0, year = 0) => {
+import { Category } from "./../models/Category";
+import { LineItem } from "../models/LineItem";
+
+/*
+///////////////////////////////
+USED AS REFERENCE FOR TYPECHECKING ONLY
+ACTUAL SEED DATA LIVES IN seed-mock-db.js FILE
+///////////////////////////////
+*/
+
+const getPreviousDate = (month: number = 0, year: number = 0) => {
   const date = new Date();
 
   if (month > 0) {
@@ -12,7 +22,7 @@ const getPreviousDate = (month = 0, year = 0) => {
   return date;
 };
 
-const lineItems = [
+const lineItems: LineItem[] = [
   {
     title: "LGE",
     description: "LGE Bill",
@@ -85,7 +95,7 @@ const lineItems = [
   }
 ];
 
-const categories = [
+const categories: Category[] = [
   {
     name: "Electricity",
     created: new Date(),
@@ -123,12 +133,3 @@ const categories = [
     isActive: true
   }
 ];
-
-// tslint:disable-next-line:no-console
-print(`🌷 💧 🌷 💧 🌷 💧 🌷 💧 Seeding budget service database`);
-
-db = db.getSiblingDB("budget");
-db.lineitems.drop();
-db.categories.drop();
-db.lineitems.insertMany(lineItems);
-db.categories.insertMany(categories);

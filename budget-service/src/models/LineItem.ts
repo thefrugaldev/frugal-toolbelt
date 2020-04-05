@@ -1,14 +1,16 @@
-import { ICategory } from "./Category";
+import { Category } from "./Category";
 import mongoose, { Document, Schema } from "mongoose";
 
-export interface ILineItem extends Document {
+export interface LineItem {
   title: string;
   description: string;
   isSavings: boolean;
-  category: ICategory;
+  category?: Category;
   amount: number;
   date: Date;
 }
+
+export interface LineItemDocument extends Document, LineItem {}
 
 const setDecimalNumber = (val: number) => {
   return (val * 100).toFixed(2);
@@ -77,4 +79,4 @@ export const lineItemSchema = new mongoose.Schema(
 //   );
 // };
 
-export default mongoose.model<ILineItem>("LineItem", LineItemSchema);
+export default mongoose.model<LineItemDocument>("LineItem", LineItemSchema);

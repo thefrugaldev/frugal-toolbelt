@@ -1,13 +1,15 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-interface ICardSchema extends Document {
+export interface Card {
   vendor: string;
-  bank: string;
+  bank?: string;
   name: string;
   applied: Date;
   approved: Date;
   bonusCategories: string[];
 }
+
+interface CardDocument extends Document, Card {}
 
 const cardSchema: Schema = new Schema({
   vendor: {
@@ -28,4 +30,4 @@ const cardSchema: Schema = new Schema({
 // TODO: Add createdAt, updatedAt, deletedAt (allowNull)
 // TODO: Set charset to UTF-8? Emoji support
 
-export default mongoose.model<ICardSchema>("Card", cardSchema);
+export default mongoose.model<CardDocument>("Card", cardSchema);
