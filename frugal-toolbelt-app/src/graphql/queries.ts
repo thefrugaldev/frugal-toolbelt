@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const GET_LINE_ITEMS = gql`
-  query getLineItems {
+  query GetLineItems {
     lineItems {
       _id
       title
@@ -20,7 +20,7 @@ export const GET_LINE_ITEMS = gql`
 `;
 
 export const GET_CATEGORIES = gql`
-  query getCategories {
+  query GetCategories {
     categories {
       _id
       name

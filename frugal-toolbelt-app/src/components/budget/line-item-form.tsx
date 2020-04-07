@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 // Components
-import TextInput from "../common/forms/text-input";
+import Input from "../common/forms/input";
 import SelectInput from "../common/forms/select-input";
 import TextArea from "../common/forms/text-area";
 import DateInput from "../common/forms/date-input";
@@ -37,15 +37,17 @@ const LineItemForm: React.FC<Props> = ({
           {errors.onSave}
         </div>
       )}
-      <TextInput
+      <Input
         name="title"
+        type="text"
         label="Title"
         value={lineItem.title}
         onChange={onChange}
         error={errors.title}
       />
-      <TextInput
+      <Input
         name="amount"
+        type="number"
         label="Amount"
         value={lineItem.amount.toString()}
         onChange={onChange}
@@ -80,7 +82,7 @@ const LineItemForm: React.FC<Props> = ({
             options={[
               {
                 value: false.toString(),
-                text: "Expense"
+                text: `Expense`
               },
               {
                 value: true.toString(),

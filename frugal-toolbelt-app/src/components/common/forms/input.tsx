@@ -3,6 +3,7 @@ import { FC } from "react";
 
 interface Props {
   name: string;
+  type: string;
   label?: string;
   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
   placeholder?: string;
@@ -10,8 +11,9 @@ interface Props {
   error?: string;
 }
 
-const TextInput: FC<Props> = ({
+const Input: FC<Props> = ({
   name,
+  type,
   label,
   onChange,
   placeholder,
@@ -32,7 +34,7 @@ const TextInput: FC<Props> = ({
       )}
       <div className="control is-expanded">
         <input
-          type="text"
+          type={type}
           name={name}
           className={inputClass}
           placeholder={placeholder}
@@ -45,4 +47,4 @@ const TextInput: FC<Props> = ({
   );
 };
 
-export default TextInput;
+export default Input;

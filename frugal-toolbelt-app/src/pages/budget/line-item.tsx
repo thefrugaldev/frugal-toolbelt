@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useQuery } from "react-apollo";
+import { useQuery, useMutation } from "react-apollo";
 import { GET_CATEGORIES } from "../../graphql/queries";
+import { CREATE_LINE_ITEM } from "../../graphql/mutations";
 // Components
 import LineItemForm from "../../components/budget/line-item-form";
 // Interfaces
-import { DefaultLineItem } from "../../interfaces/LineItem";
+import LineItem, { DefaultLineItem } from "../../interfaces/LineItem";
 
-interface Props {
-  saveLineItem: Function;
-}
-
-const LineItemPage: React.FC<Props> = ({ saveLineItem }) => {
-  const [lineItem, setLineItem] = useState(DefaultLineItem);
+const LineItemPage: React.FC = () => {
+  const [lineItem, setLineItem] = useState<LineItem>(DefaultLineItem);
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
 
   const { loading, error, data } = useQuery(GET_CATEGORIES);
+  const [saveLineItem] = useMutation(CREATE_LINE_ITEM);
 
   // useEffect(() => {
   //   if (lineItems.length === 0) {
@@ -32,10 +30,18 @@ const LineItemPage: React.FC<Props> = ({ saveLineItem }) => {
   // }, [props.lineItem]);
 
   const handleChange = event => {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
 
-    // tslint:disable-next-line:no-console
-    console.log(`Changing ${name} to ${value}`);
+    switch (typeof lineItem[name]) {
+      case "number":
+        value = parseInt(value);
+        break;
+      case "boolean":
+        value = value == "true";
+      default:
+        break;
+    }
+
     setLineItem(prevLineItem => ({
       ...prevLineItem,
       [name]: value
@@ -50,7 +56,7 @@ const LineItemPage: React.FC<Props> = ({ saveLineItem }) => {
     if (!amount) errors.amount = "Amount is required";
     if (!date) errors.date = "Please select a date";
     if (!category) errors.category = "Please select a category";
-    if (!isSavings) errors.type = "Please choose an entry type";
+    // if (!isSavings) errors.type = "Please choose an entry type";
 
     setErrors(errors);
     // Form is valid if the errors object still has no properties
@@ -59,9 +65,18 @@ const LineItemPage: React.FC<Props> = ({ saveLineItem }) => {
 
   const handleSave = event => {
     event.preventDefault();
+
     if (!formIsValid()) return;
+
     setSaving(true);
-    saveLineItem(lineItem)
+    saveLineItem({
+      variables: {
+        title: lineItem.title,
+        description: lineItem.description,
+        isSavings: lineItem.isSavings,
+        amount: lineItem.amount
+      }
+    })
       .then(() => {
         toast.success("Budget Saved.");
         // history.push("/budget");
