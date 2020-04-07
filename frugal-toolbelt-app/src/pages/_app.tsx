@@ -5,17 +5,17 @@ import { ApolloProvider } from "react-apollo";
 import { Auth0Provider } from "../lib/auth0-spa";
 import Navbar from "../components/common/navbar";
 import graphqlClient from "../api/graphql-client";
+import { ToastContainer } from "react-toastify";
 //Styles
 import "bulma/css/bulma.css";
 import "bulma-calendar/dist/css/bulma-calendar.min.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export default class FrugalToolbeltApp extends App {
   render() {
     const { Component, pageProps, router } = this.props;
 
     const onRedirectCallback = appState => {
-      console.log(`appState`, appState);
-
       window.location =
         appState && appState.targetUrl ? appState.targetUrl : "/";
     };
@@ -34,6 +34,7 @@ export default class FrugalToolbeltApp extends App {
           <section>
             <Navbar />
             <Component {...pageProps} router={router} />
+            <ToastContainer autoClose={3000} hideProgressBar />
           </section>
         </Auth0Provider>
       </ApolloProvider>

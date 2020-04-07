@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from "react-apollo";
 import { GET_CATEGORIES } from "../../graphql/queries";
 import { CREATE_LINE_ITEM } from "../../graphql/mutations";
+import { useRouter } from "next/router";
 // Components
 import LineItemForm from "../../components/budget/line-item-form";
 // Interfaces
@@ -12,24 +13,12 @@ const LineItemPage: React.FC = () => {
   const [lineItem, setLineItem] = useState<LineItem>(DefaultLineItem);
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
+  const router = useRouter();
 
   const { loading, error, data } = useQuery(GET_CATEGORIES);
   const [saveLineItem] = useMutation(CREATE_LINE_ITEM);
 
-  // useEffect(() => {
-  //   if (lineItems.length === 0) {
-  //     loadLineItems().catch(error => {
-  //       alert(`Loading line items failed ${error}`);
-  //     });
-  //   } else {
-  //     setLineItem({ ...props.lineItem });
-  //   }
-  //   loadCategories().catch(error => {
-  //     alert(`Loading categories failed ${error}`);
-  //   });
-  // }, [props.lineItem]);
-
-  const handleChange = event => {
+  const handleChange = (event: any) => {
     let { name, value } = event.target;
 
     switch (typeof lineItem[name]) {
@@ -56,7 +45,7 @@ const LineItemPage: React.FC = () => {
     if (!amount) errors.amount = "Amount is required";
     if (!date) errors.date = "Please select a date";
     if (!category) errors.category = "Please select a category";
-    // if (!isSavings) errors.type = "Please choose an entry type";
+    if (!isSavings) errors.type = "Please choose an entry type";
 
     setErrors(errors);
     // Form is valid if the errors object still has no properties
@@ -79,7 +68,7 @@ const LineItemPage: React.FC = () => {
     })
       .then(() => {
         toast.success("Budget Saved.");
-        // history.push("/budget");
+        router.push("/budget");
       })
       .catch(error => {
         setSaving(false);
