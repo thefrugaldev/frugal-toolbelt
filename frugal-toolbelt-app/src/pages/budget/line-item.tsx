@@ -5,23 +5,14 @@ import { GET_CATEGORIES } from "../../graphql/queries";
 // Components
 import LineItemForm from "../../components/budget/line-item-form";
 // Interfaces
-import LineItem, { DefaultLineItem } from "../../interfaces/LineItem";
+import { DefaultLineItem } from "../../interfaces/LineItem";
 
 interface Props {
-  lineItems: [LineItem];
   saveLineItem: Function;
-  loadLineItems: Function;
-  loadCategories: Function;
 }
 
-const LineItemPage: React.FC<Props> = ({
-  lineItems,
-  saveLineItem,
-  loadLineItems,
-  loadCategories
-}) => {
-  const lineItem = DefaultLineItem;
-  // const [lineItem, setLineItem] = useState({ ...props.lineItem });
+const LineItemPage: React.FC<Props> = ({ saveLineItem }) => {
+  const [lineItem, setLineItem] = useState(DefaultLineItem);
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
 
@@ -45,10 +36,10 @@ const LineItemPage: React.FC<Props> = ({
 
     // tslint:disable-next-line:no-console
     console.log(`Changing ${name} to ${value}`);
-    // setLineItem(prevLineItem => ({
-    //   ...prevLineItem,
-    //   [name]: value
-    // }));
+    setLineItem(prevLineItem => ({
+      ...prevLineItem,
+      [name]: value
+    }));
   };
 
   const formIsValid = () => {
