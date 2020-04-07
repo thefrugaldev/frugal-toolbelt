@@ -9,3 +9,13 @@ export default interface LineItem {
   date: string;
   category: Category;
 }
+
+export const DefaultLineItem: LineItem = {
+  _id: null,
+  title: "",
+  description: "",
+  isSavings: false,
+  amount: 0,
+  date: new Date().toDateString(),
+  category: null
+};

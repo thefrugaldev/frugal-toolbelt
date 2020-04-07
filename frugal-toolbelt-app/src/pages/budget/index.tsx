@@ -2,29 +2,10 @@ import React from "react";
 import { requireUser } from "../../lib/auth0-spa";
 import { monthNames } from "../../lib/datetime-helpers";
 import { useQuery } from "react-apollo";
-import gql from "graphql-tag";
+import { GET_LINE_ITEMS } from "../../graphql/queries";
 // Components
 import LineItemList from "../../components/budget/line-item-list";
 import BudgetPageFooter from "../../components/budget/footer";
-
-const GET_LINE_ITEMS = gql`
-  query getLineItems {
-    lineItems {
-      _id
-      title
-      description
-      isSavings
-      amount
-      date
-      category {
-        _id
-        name
-        icon
-        isActive
-      }
-    }
-  }
-`;
 
 const Budget: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = React.useState(
