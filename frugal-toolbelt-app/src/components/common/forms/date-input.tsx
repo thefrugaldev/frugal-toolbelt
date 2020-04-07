@@ -1,7 +1,5 @@
-import * as React from "react";
-import { FC, useEffect } from "react";
-// import bulmaCalendar from "bulma-calendar";
-// import * as bulmaCalendar from "bulma-calendar/dist/js/bulma-calendar.min";
+import React, { useEffect, useRef } from "react";
+import flatpickr from "flatpickr";
 
 interface Props {
   name: string;
@@ -12,7 +10,7 @@ interface Props {
   error?: string;
 }
 
-const DateInput: FC<Props> = ({
+const DateInput: React.FC<Props> = ({
   name,
   label,
   onChange,
@@ -20,26 +18,11 @@ const DateInput: FC<Props> = ({
   value,
   error
 }) => {
-  // useEffect(() => {
-  //   // Initialize all input of date type.
-  //   const calendars = bulmaCalendar.attach('[type="date"]', {
-  //     startDate: new Date(props.value)
-  //   });
+  const datepicker = React.useRef();
 
-  //   // Loop on each calendar initialized
-  //   calendars.forEach(calendar => {
-  //     // Add listener to date:selected event
-  //     // calendar.on("select", date => {
-  //     //   () =>
-  //     //     props.onChange({
-  //     //       target: {
-  //     //         name,
-  //     //         value: date.data.value()
-  //     //       }
-  //     //     });
-  //     // });
-  //   });
-  // }, []);
+  useEffect(() => {
+    flatpickr(datepicker.current, {});
+  }, []);
 
   let inputClass = "input";
   if (error && error.length > 0) {
@@ -56,6 +39,7 @@ const DateInput: FC<Props> = ({
       <div className="control">
         <input
           type="date"
+          ref={datepicker}
           name={name}
           className={inputClass}
           id="datepicker"

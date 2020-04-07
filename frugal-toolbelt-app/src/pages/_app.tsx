@@ -8,8 +8,8 @@ import graphqlClient from "../api/graphql-client";
 import { ToastContainer } from "react-toastify";
 //Styles
 import "bulma/css/bulma.css";
-import "bulma-calendar/dist/css/bulma-calendar.min.css";
 import "react-toastify/dist/ReactToastify.css";
+import "flatpickr/dist/flatpickr.min.css";
 
 export default class FrugalToolbeltApp extends App {
   render() {
