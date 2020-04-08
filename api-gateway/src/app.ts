@@ -2,13 +2,17 @@ import { ApolloServer } from "apollo-server-express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import { schema } from "./graphql";
+import typeDefs from "./graphql/schema";
+import resolvers from "./graphql/resolvers";
+import { makeExecutableSchema } from "apollo-server";
 import formatGraphQLErrors from "./graphql/helpers/error-handlers";
 
 const apolloServer = new ApolloServer({
   formatError: formatGraphQLErrors,
-  // resolvers,
-  schema
+  schema: makeExecutableSchema({
+    typeDefs,
+    resolvers
+  })
 });
 
 const app = express();
