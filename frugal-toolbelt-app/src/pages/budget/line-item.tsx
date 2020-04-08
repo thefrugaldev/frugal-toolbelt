@@ -18,8 +18,11 @@ const LineItemPage: React.FC = () => {
   const { loading, error, data } = useQuery(GET_CATEGORIES);
   const [saveLineItem] = useMutation(CREATE_LINE_ITEM);
 
-  const handleChange = (event: any) => {
-    let { name, type, value } = event.target;
+  const handleChange = (event: React.FormEvent<any>) => {
+    let { name, type, value } = event.currentTarget;
+
+    // tslint:disable-next-line:no-console
+    console.log(`changing ${name} to ${value}`);
 
     switch (typeof lineItem[name]) {
       case "number":
@@ -60,11 +63,14 @@ const LineItemPage: React.FC = () => {
     setSaving(true);
     saveLineItem({
       variables: {
-        title: lineItem.title,
-        description: lineItem.description,
-        isSavings: lineItem.isSavings,
-        amount: lineItem.amount
+        lineItem
       }
+      // variables: {
+      //   title: lineItem.title,
+      //   description: lineItem.description,
+      //   isSavings: lineItem.isSavings,
+      //   amount: lineItem.amount
+      // }
     })
       .then(() => {
         toast.success("Budget Saved.");
