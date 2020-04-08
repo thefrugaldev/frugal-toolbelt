@@ -1,4 +1,4 @@
-export default interface ICard {
+export default interface Card {
   id: string;
   vendor: string;
   bank: string;

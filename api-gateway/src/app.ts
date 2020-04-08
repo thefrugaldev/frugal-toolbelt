@@ -2,7 +2,7 @@ import { ApolloServer } from "apollo-server-express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import { schema } from "./graphql/schema";
+import { schema } from "./graphql";
 import formatGraphQLErrors from "./graphql/helpers/error-handlers";
 
 const apolloServer = new ApolloServer({

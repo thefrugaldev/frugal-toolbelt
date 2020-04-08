@@ -1,5 +1,5 @@
 import axios from "axios";
-import ILineItem from "../interfaces/ILineItem";
+import LineItem from "../interfaces/LineItem";
 
 const BUDGET_SERVICE_URI = "http://budget-service:8081";
 
@@ -36,7 +36,7 @@ export default class LineItemService {
     return body;
   }
 
-  static async createLineItemAsync(lineItem: ILineItem) {
+  static async createLineItemAsync(lineItem: LineItem) {
     const body = await axios
       .post(`${BUDGET_SERVICE_URI}/line-items`, lineItem)
       .then(res => {

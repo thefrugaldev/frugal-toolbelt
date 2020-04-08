@@ -38,7 +38,14 @@ const createLineItemAsync = async (
   res: express.Response
 ) => {
   const lineItem = new LineItem(req.body);
-  await lineItem.save();
+
+  try {
+    await lineItem.save();
+  } catch (error) {
+    // tslint:disable-next-line:no-console
+    console.error("Error saving line item.", error);
+  }
+
   res.send(lineItem);
 };
 

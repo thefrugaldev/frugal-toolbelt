@@ -1,5 +1,5 @@
 import axios from "axios";
-import ICard from "../interfaces/ICard";
+import Card from "../interfaces/Card";
 
 const CARD_CHURNING_SERVICE_URI = "http://card-churning-service:8080";
 
@@ -35,7 +35,7 @@ export default class CardChurningService {
     return body;
   }
 
-  static async createCardAsync(card: ICard) {
+  static async createCardAsync(card: Card) {
     const body = await axios
       .post(`${CARD_CHURNING_SERVICE_URI}/cards`, card)
       .then(res => {

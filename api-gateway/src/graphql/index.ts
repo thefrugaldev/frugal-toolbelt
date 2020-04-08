@@ -1,15 +1,9 @@
-import {
-  typeDef as LineItem,
-  resolvers as lineItemResolvers
-} from "./line-item";
-import {
-  typeDef as Category,
-  resolvers as categoryResolvers
-} from "./category";
-import {
-  typeDef as CardChurning,
-  resolvers as cardChurningResolvers
-} from "./card-churning";
+import { typeDef as LineItem } from "./schema/line-item";
+import { typeDef as Category } from "./schema/category";
+import { typeDef as CardChurning } from "./schema/card-churning";
+import { resolvers as lineItemResolvers } from "./resolvers/line-item";
+import { resolvers as categoryResolvers } from "./resolvers/category";
+import { resolvers as cardChurningResolvers } from "./resolvers/card-churning";
 import { gql, makeExecutableSchema } from "apollo-server";
 import { merge } from "lodash";
 

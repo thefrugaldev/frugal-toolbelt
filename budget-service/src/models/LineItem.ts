@@ -36,7 +36,7 @@ const LineItemSchema: Schema = new Schema(
       set: setDecimalNumber,
       get: getDecimalNumber
     },
-    date: { type: Date, default: Date.now },
+    date: { type: Date, default: Date.now, required: true },
     created: { type: Date, default: Date.now }
   },
   { toJSON: { getters: true }, toObject: { getters: true } }

@@ -1,4 +1,4 @@
-export default interface ILineItem {
+export default interface LineItem {
   id: string;
   title: string;
   description: string;

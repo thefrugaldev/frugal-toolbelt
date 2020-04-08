@@ -1,6 +1,4 @@
 import { gql } from "apollo-server";
-import ICard from "../interfaces/ICard";
-import CardChurningService from "../adapters/card-churning-service";
 
 export const typeDef = gql`
   type Card {
@@ -10,8 +8,15 @@ export const typeDef = gql`
     name: String!
   }
 
+  input CreateCardInput {
+    _id: ID
+    vendor: String!
+    bank: String!
+    name: String!
+  }
+
   extend type Mutation {
-    createCard(vendor: String!, bank: String, name: String!): Card!
+    createCard(card: CreateCardInput!): Card!
   }
 
   extend type Query {
@@ -19,19 +24,3 @@ export const typeDef = gql`
     card(id: ID!): Card!
   }
 `;
-
-export const resolvers = {
-  Query: {
-    card: async (obj: any, card: ICard) => {
-      return await CardChurningService.fetchCardByIdAsync(card.id);
-    },
-    cards: async () => {
-      return await CardChurningService.fetchAllCardsAsync();
-    }
-  },
-  Mutation: {
-    createCard: async (obj: any, card: ICard) => {
-      return await CardChurningService.createCardAsync(card);
-    }
-  }
-};

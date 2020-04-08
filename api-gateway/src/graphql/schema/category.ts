@@ -1,6 +1,4 @@
 import { gql } from "apollo-server";
-import ICategory from "../interfaces/ICategory";
-import CategoryService from "../adapters/category-service";
 
 export const typeDef = gql`
   type Category {
@@ -8,10 +6,18 @@ export const typeDef = gql`
     name: String!
     icon: String!
     isActive: Boolean
+    #TODO: Add date resolver to root
+    # created: Date
+  }
+
+  input CreateCategoryInput {
+    _id: ID
+    name: String!
+    icon: String
   }
 
   extend type Mutation {
-    createCategory(name: String!): Category!
+    createCategory(category: CreateCategoryInput!): Category!
   }
 
   extend type Query {
@@ -19,20 +25,3 @@ export const typeDef = gql`
     category(id: ID!): Category!
   }
 `;
-
-export const resolvers = {
-  Query: {
-    categories: async () => {
-      return await CategoryService.fetchCategoriesAsync();
-    },
-    // TODO: Create route in api
-    category: async (obj: any, category: ICategory) => {
-      return await CategoryService.fetchCategoryByIdAsync(category.id);
-    }
-  },
-  Mutation: {
-    createCategory: async (obj: any, category: ICategory) => {
-      return await CategoryService.createCategoryAsync(category);
-    }
-  }
-};

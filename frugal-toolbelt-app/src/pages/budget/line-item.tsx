@@ -19,7 +19,7 @@ const LineItemPage: React.FC = () => {
   const [saveLineItem] = useMutation(CREATE_LINE_ITEM);
 
   const handleChange = (event: any) => {
-    let { name, value } = event.target;
+    let { name, type, value } = event.target;
 
     switch (typeof lineItem[name]) {
       case "number":

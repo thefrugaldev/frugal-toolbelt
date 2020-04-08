@@ -1,5 +1,5 @@
 import axios from "axios";
-import ICategory from "../interfaces/ICategory";
+import Category from "../interfaces/Category";
 
 const BUDGET_SERVICE_URI = "http://budget-service:8081";
 
@@ -36,7 +36,7 @@ export default class CategoryService {
     return body;
   }
 
-  static async createCategoryAsync(category: ICategory) {
+  static async createCategoryAsync(category: Category) {
     const body = await axios
       .post(`${BUDGET_SERVICE_URI}/categories`, category)
       .then(res => {
