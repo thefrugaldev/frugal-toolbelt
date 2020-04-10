@@ -5,7 +5,7 @@ import SelectInput from "../common/forms/select-input";
 import TextArea from "../common/forms/text-area";
 import DateInput from "../common/forms/date-input";
 // Interfaces
-import LineItem, { DefaultLineItem } from "../../interfaces/LineItem";
+import LineItem from "../../interfaces/LineItem";
 import Category from "../../interfaces/Category";
 
 interface Props {
@@ -23,12 +23,8 @@ const LineItemForm: React.FC<Props> = ({
   onSave,
   onChange,
   saving = false,
-  errors = {}
+  errors = {},
 }) => {
-  // useEffect(() => {
-  //   lineItems.find(lineItem => lineItem._id === id) || null;
-  // })
-
   return (
     <form onSubmit={onSave}>
       <h2 className="title">{lineItem._id ? "Edit" : "Add"} Budget</h2>
@@ -67,9 +63,9 @@ const LineItemForm: React.FC<Props> = ({
             label="Category"
             value={lineItem.category ? lineItem.category._id : ""}
             defaultOption="Select Category"
-            options={categories.map(cat => ({
+            options={categories.map((cat) => ({
               value: cat._id,
-              text: cat.name
+              text: cat.name,
             }))}
             onChange={onChange}
             error={errors.category}
@@ -82,12 +78,12 @@ const LineItemForm: React.FC<Props> = ({
             options={[
               {
                 value: false.toString(),
-                text: `Expense`
+                text: `Expense`,
               },
               {
                 value: true.toString(),
-                text: `Savings`
-              }
+                text: `Savings`,
+              },
             ]}
             onChange={onChange}
             error={errors.type}

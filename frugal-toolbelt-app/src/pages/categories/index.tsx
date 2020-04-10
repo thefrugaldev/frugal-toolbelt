@@ -1,34 +1,50 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { useQuery, useMutation } from "react-apollo";
+import { GET_CATEGORIES } from "../../graphql/queries";
+import { CREATE_CATEGORY } from "../../graphql/mutations";
 // Components
 import Input from "../../components/common/forms/input";
 import IconPicker from "../../components/common/icon-picker";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//Interfaces
+import Category, { NewCategory } from "../../interfaces/Category";
 
-const ManageCategoriesPage = ({
-  categories,
-  loadCategories,
-  saveCategory,
-  deleteCategory,
-}) => {
-  const [newCategory, setNewCategory] = useState("");
-  const [selectedIcon, setSelectedIcon] = useState("");
+const ManageCategoriesPage = ({ deleteCategory }) => {
+  const [category, setCategory] = useState<Category>(NewCategory);
+  const [selectedIcon, setSelectedIcon] = useState<IconProp>();
 
-  useEffect(() => {
-    // loadCategories().catch((error) => {
-    //   console.error("Failed to load categories: ", error);
-    // });
-  }, []);
+  const { loading, error, data } = useQuery(GET_CATEGORIES);
+  const [saveCategory] = useMutation(CREATE_CATEGORY);
 
-  const handleChange = (event, icon) => {
-    icon ? setSelectedIcon(icon) : setNewCategory(event.target.value);
+  const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+    //TODO: Dig into why rendering is so laggy
+
+    const { value } = event.currentTarget;
+
+    console.log(value);
+
+    setCategory((category) => ({
+      ...category,
+      name: value,
+    }));
+  };
+
+  const handleIconSelection = (icon: IconProp) => {
+    setSelectedIcon(icon);
+    setCategory((category) => ({ ...category, icon: icon.toString() }));
   };
 
   const handleSave = () => {
-    saveCategory({ name: newCategory, icon: selectedIcon }).catch((error) =>
-      console.error(`Failed to save category: `, error)
-    );
-    setSelectedIcon("");
-    setNewCategory("");
+    // const category = { name: category, icon: selectedIcon };
+
+    console.log(category);
+
+    saveCategory({
+      variables: { category },
+    }).catch((error) => console.error(`Failed to save category: `, error));
+    setSelectedIcon(null);
+    // setCategory("");
   };
 
   const handleDelete = (category) => {
@@ -39,7 +55,9 @@ const ManageCategoriesPage = ({
 
   return (
     <>
-      {/* {categories.length === 0 ? (
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : data.categories.length === 0 ? (
         <h2 className="title">No Categories. Create One Below</h2>
       ) : (
         <>
@@ -56,7 +74,7 @@ const ManageCategoriesPage = ({
                 </thead>
 
                 <tbody>
-                  {categories.map((category) => {
+                  {data.categories.map((category) => {
                     return (
                       <tr key={category._id}>
                         <td>
@@ -85,23 +103,24 @@ const ManageCategoriesPage = ({
             </div>
           </div>
         </>
-      )} */}
+      )}
       <div className="field is-grouped columns is-centered m-t-lg">
         <div className="control">
-          <IconPicker onChange={handleChange} />
+          <IconPicker onIconSelection={handleIconSelection} />
           {selectedIcon && (
             <span className="icon has-text-info is-large">
-              {/* <FontAwesomeIcon icon={selectedIcon} size="2x" /> */}
+              <FontAwesomeIcon icon={selectedIcon} size="2x" />
             </span>
           )}
         </div>
         <div className="control">
-          {/* <Input
+          <Input
+            type="text"
             name="category"
             placeholder={"Category Name"}
-            onChange={handleChange}
-            value={newCategory}
-          /> */}
+            onChange={handleInputChange}
+            value={category?.name}
+          />
         </div>
         <div className="control">
           <button onClick={handleSave} className="button is-success">

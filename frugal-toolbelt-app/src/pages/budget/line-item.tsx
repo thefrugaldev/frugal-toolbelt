@@ -7,10 +7,10 @@ import { useRouter } from "next/router";
 // Components
 import LineItemForm from "../../components/budget/line-item-form";
 // Interfaces
-import LineItem, { DefaultLineItem } from "../../interfaces/LineItem";
+import LineItem, { NewLineItem } from "../../interfaces/LineItem";
 
 const LineItemPage: React.FC = () => {
-  const [lineItem, setLineItem] = useState<LineItem>(DefaultLineItem);
+  const [lineItem, setLineItem] = useState<LineItem>(NewLineItem);
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
   const router = useRouter();
@@ -34,9 +34,9 @@ const LineItemPage: React.FC = () => {
         break;
     }
 
-    setLineItem(prevLineItem => ({
+    setLineItem((prevLineItem) => ({
       ...prevLineItem,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -55,7 +55,7 @@ const LineItemPage: React.FC = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSave = event => {
+  const handleSave = (event) => {
     event.preventDefault();
 
     if (!formIsValid()) return;
@@ -63,20 +63,14 @@ const LineItemPage: React.FC = () => {
     setSaving(true);
     saveLineItem({
       variables: {
-        lineItem
-      }
-      // variables: {
-      //   title: lineItem.title,
-      //   description: lineItem.description,
-      //   isSavings: lineItem.isSavings,
-      //   amount: lineItem.amount
-      // }
+        lineItem,
+      },
     })
       .then(() => {
         toast.success("Budget Saved.");
         router.push("/budget");
       })
-      .catch(error => {
+      .catch((error) => {
         setSaving(false);
         setErrors({ onSave: error.message });
       });

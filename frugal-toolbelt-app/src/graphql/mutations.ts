@@ -7,3 +7,13 @@ export const CREATE_LINE_ITEM = gql`
     }
   }
 `;
+
+export const CREATE_CATEGORY = gql`
+  mutation CreateCategory($category: CreateCategoryInput!) {
+    createCategory(category: $category) {
+      _id
+      name
+      icon
+    }
+  }
+`;

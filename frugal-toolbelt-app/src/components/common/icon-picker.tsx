@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
-import { library } from "@fortawesome/fontawesome-svg-core";
+import { library, IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 // Styles
 // import "./icon-picker.scss";
 
-const IconPicker = ({ onChange }) => {
+interface Props {
+  onIconSelection: (icon: IconProp) => void;
+}
+
+const IconPicker: React.FC<Props> = ({ onIconSelection }) => {
   const [iconNames, setIconNames] = useState([]);
   const [activeModal, setActiveModal] = useState(false);
 
   useEffect(() => {
+    console.log("rendering icon picker component");
+
     library.add(fas);
     const iconPack = Object.values(fas);
 
@@ -49,8 +55,8 @@ const IconPicker = ({ onChange }) => {
                 <span
                   className="icon has-text-info is-large"
                   key={icon}
-                  onClick={(e) => {
-                    onChange(e, icon);
+                  onClick={() => {
+                    onIconSelection(icon);
                     setActiveModal(false);
                   }}
                 >

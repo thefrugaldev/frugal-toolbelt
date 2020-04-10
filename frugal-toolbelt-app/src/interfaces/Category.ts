@@ -1,6 +1,11 @@
 export default interface Category {
-  _id: string;
+  _id?: string;
   name: string;
   icon: string;
-  isActive: boolean;
+  isActive?: boolean;
 }
+
+export const NewCategory: Category = {
+  name: "",
+  icon: "",
+};
