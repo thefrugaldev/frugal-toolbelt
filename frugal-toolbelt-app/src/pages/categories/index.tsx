@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useQuery, useMutation } from "react-apollo";
@@ -10,19 +10,23 @@ import IconPicker from "../../components/common/icon-picker";
 //Interfaces
 import Category, { NewCategory } from "../../interfaces/Category";
 
-const ManageCategoriesPage = ({ deleteCategory }) => {
+interface Props {
+  deleteCategory: any;
+}
+
+const ManageCategoriesPage: React.FC<Props> = ({ deleteCategory }) => {
   const [category, setCategory] = useState<Category>(NewCategory);
   const [selectedIcon, setSelectedIcon] = useState<IconProp>();
 
-  const { loading, error, data } = useQuery(GET_CATEGORIES);
+  const { loading, data } = useQuery(GET_CATEGORIES);
   const [saveCategory] = useMutation(CREATE_CATEGORY);
 
-  const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    event: React.FormEvent<HTMLInputElement>
+  ): void => {
     //TODO: Dig into why rendering is so laggy
 
     const { value } = event.currentTarget;
-
-    console.log(value);
 
     setCategory((category) => ({
       ...category,
@@ -30,12 +34,14 @@ const ManageCategoriesPage = ({ deleteCategory }) => {
     }));
   };
 
-  const handleIconSelection = (icon: IconProp) => {
+  const handleIconSelection = (icon: IconProp): void => {
     setSelectedIcon(icon);
-    setCategory((category) => ({ ...category, icon: icon.toString() }));
+    setCategory(
+      (category): Category => ({ ...category, icon: icon.toString() })
+    );
   };
 
-  const handleSave = () => {
+  const handleSave = (): void => {
     // const category = { name: category, icon: selectedIcon };
 
     console.log(category);
@@ -47,7 +53,7 @@ const ManageCategoriesPage = ({ deleteCategory }) => {
     // setCategory("");
   };
 
-  const handleDelete = (category) => {
+  const handleDelete = (category): void => {
     deleteCategory(category).catch((error) =>
       console.error(`Failed to delete category: `, error)
     );
@@ -80,7 +86,7 @@ const ManageCategoriesPage = ({ deleteCategory }) => {
                         <td>
                           {category.icon ? (
                             <span className="icon has-text-info is-large">
-                              <FontAwesomeIcon icon={category.icon} />
+                              {/* <FontAwesomeIcon icon={category.icon} /> */}
                             </span>
                           ) : (
                             ""
@@ -89,7 +95,7 @@ const ManageCategoriesPage = ({ deleteCategory }) => {
                         <td>{category.name}</td>
                         <td>
                           <button
-                            onClick={() => handleDelete(category)}
+                            onClick={(): void => handleDelete(category)}
                             className="button is-danger"
                           >
                             Delete

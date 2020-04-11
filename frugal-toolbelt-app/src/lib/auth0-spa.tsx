@@ -4,7 +4,7 @@ import Auth0Client from "@auth0/auth0-spa-js/dist/typings/Auth0Client";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
 
-const DEFAULT_REDIRECT_CALLBACK = () =>
+const DEFAULT_REDIRECT_CALLBACK = (): void =>
   window.history.replaceState({}, document.title, window.location.pathname);
 
 interface Auth0ProviderProps {
@@ -30,14 +30,14 @@ interface Auth0ContextProps {
 }
 
 export const Auth0Context = React.createContext<Auth0ContextProps>(null);
-export const useAuth0 = () => React.useContext(Auth0Context);
+export const useAuth0 = (): Auth0ContextProps => React.useContext(Auth0Context);
 
 export const Auth0Provider: React.FunctionComponent<Auth0ProviderProps> = ({
   children,
   onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
   domain,
   clientId,
-  redirectUri
+  redirectUri,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>();
   const [user, setUser] = React.useState();
@@ -45,12 +45,12 @@ export const Auth0Provider: React.FunctionComponent<Auth0ProviderProps> = ({
   const [loading, setLoading] = React.useState<boolean>(true);
   const [popupOpen, setPopupOpen] = React.useState<boolean>(false);
 
-  React.useEffect(() => {
-    const initAuth0 = async () => {
+  React.useEffect((): void => {
+    const initAuth0 = async (): Promise<void> => {
       const auth0FromHook = await createAuth0Client({
         domain,
-        client_id: clientId,
-        redirect_uri: redirectUri
+        client_id: clientId, // eslint-disable-line
+        redirect_uri: redirectUri, // eslint-disable-line
       });
 
       setAuth0(auth0FromHook);
@@ -75,7 +75,7 @@ export const Auth0Provider: React.FunctionComponent<Auth0ProviderProps> = ({
     initAuth0();
   }, []);
 
-  const loginWithPopup = async (params = {}) => {
+  const loginWithPopup = async (params = {}): Promise<void> => {
     setPopupOpen(true);
 
     try {
@@ -91,7 +91,7 @@ export const Auth0Provider: React.FunctionComponent<Auth0ProviderProps> = ({
     setIsAuthenticated(true);
   };
 
-  const handleRedirectCallback = async () => {
+  const handleRedirectCallback = async (): Promise<void> => {
     setLoading(true);
     await auth0Client.handleRedirectCallback();
     const user = await auth0Client.getUser();
@@ -109,11 +109,15 @@ export const Auth0Provider: React.FunctionComponent<Auth0ProviderProps> = ({
         popupOpen,
         loginWithPopup,
         handleRedirectCallback,
-        getIdTokenClaims: (...p) => auth0Client.getIdTokenClaims(...p),
-        loginWithRedirect: (...p) => auth0Client.loginWithRedirect(...p),
-        getTokenSilently: (...p) => auth0Client.getTokenSilently(...p),
-        getTokenWithPopup: (...p) => auth0Client.getTokenWithPopup(...p),
-        logout: (...p) => auth0Client.logout(...p)
+        getIdTokenClaims: (...p): Promise<IdToken> =>
+          auth0Client.getIdTokenClaims(...p),
+        loginWithRedirect: (...p): Promise<void> =>
+          auth0Client.loginWithRedirect(...p),
+        getTokenSilently: (...p): Promise<any> =>
+          auth0Client.getTokenSilently(...p),
+        getTokenWithPopup: (...p): Promise<string> =>
+          auth0Client.getTokenWithPopup(...p),
+        logout: (...p): void => auth0Client.logout(...p),
       }}
     >
       {children}
@@ -130,16 +134,16 @@ interface RequireUserProps {
 export const requireUser = (
   page: NextPage
 ): React.FunctionComponent<NextPage> => {
-  return (props: any) => {
+  return (props: any): React.ReactElement<any, any> => {
     const router = useRouter();
     const { loading, isAuthenticated, loginWithRedirect } = useAuth0();
 
     React.useEffect(() => {
       if (loading || isAuthenticated) return;
 
-      const fn = async () => {
+      const fn = async (): Promise<void> => {
         await loginWithRedirect({
-          appState: { targetUrl: router.asPath }
+          appState: { targetUrl: router.asPath },
         });
       };
       fn();
@@ -147,6 +151,6 @@ export const requireUser = (
 
     if (loading || !isAuthenticated) return null;
 
-    return React.createElement(page, props);
+    return React.createElement(page, props, { displayName: "requireUser" });
   };
 };

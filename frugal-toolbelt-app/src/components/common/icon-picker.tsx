@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import { library, IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -12,18 +11,27 @@ interface Props {
 
 const IconPicker: React.FC<Props> = ({ onIconSelection }) => {
   const [iconNames, setIconNames] = useState([]);
+  const [iconPack, setIconPack] = useState([]);
   const [activeModal, setActiveModal] = useState(false);
+
+  useEffect(() => {
+    console.log(iconNames);
+  }, []);
 
   useEffect(() => {
     console.log("rendering icon picker component");
 
     library.add(fas);
-    const iconPack = Object.values(fas);
+    setIconPack(Object.values(fas));
+  }, []);
+
+  useEffect(() => {
+    console.log("icon pack changed: ", iconPack);
 
     iconPack.forEach((icon) => {
       setIconNames((prevNames) => [...prevNames, icon.iconName]);
     });
-  }, []);
+  }, [iconPack]);
 
   return (
     <>
@@ -31,7 +39,7 @@ const IconPicker: React.FC<Props> = ({ onIconSelection }) => {
         className="button is-primary"
         data-target="icon-modal"
         aria-haspopup="true"
-        onClick={() => setActiveModal(true)}
+        onClick={(): void => setActiveModal(true)}
       >
         Icon
       </button>
@@ -45,7 +53,7 @@ const IconPicker: React.FC<Props> = ({ onIconSelection }) => {
             <p className="modal-card-title">Select an Icon</p>
             <button
               className="delete"
-              onClick={() => setActiveModal(false)}
+              onClick={(): void => setActiveModal(false)}
               aria-label="close"
             ></button>
           </div>
@@ -55,7 +63,7 @@ const IconPicker: React.FC<Props> = ({ onIconSelection }) => {
                 <span
                   className="icon has-text-info is-large"
                   key={icon}
-                  onClick={() => {
+                  onClick={(): void => {
                     onIconSelection(icon);
                     setActiveModal(false);
                   }}
@@ -68,7 +76,7 @@ const IconPicker: React.FC<Props> = ({ onIconSelection }) => {
         </div>
         <button
           className="modal-close is-large"
-          onClick={() => setActiveModal(false)}
+          onClick={(): void => setActiveModal(false)}
           aria-label="close"
         ></button>
       </div>

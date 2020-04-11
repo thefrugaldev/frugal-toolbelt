@@ -8,7 +8,7 @@ const Navbar: React.FunctionComponent = () => {
     loginWithRedirect,
     logout,
     loading,
-    user
+    user,
   } = useAuth0();
 
   return (
@@ -65,13 +65,13 @@ const Navbar: React.FunctionComponent = () => {
                 <div className="buttons">
                   <button
                     className="button is-primary"
-                    onClick={() => loginWithRedirect({})}
+                    onClick={(): void => loginWithRedirect({})}
                   >
                     <strong>Sign up</strong>
                   </button>
                   <button
                     className="button is-light"
-                    onClick={() => loginWithRedirect({})}
+                    onClick={(): void => loginWithRedirect({})}
                   >
                     Log in
                   </button>
@@ -84,7 +84,7 @@ const Navbar: React.FunctionComponent = () => {
                   <div className="buttons">
                     <button
                       className="button is-danger"
-                      onClick={() => logout()}
+                      onClick={(): void => logout()}
                     >
                       Log out
                     </button>

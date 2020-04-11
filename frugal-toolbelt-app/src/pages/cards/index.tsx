@@ -3,8 +3,6 @@ import { requireUser } from "../../lib/auth0-spa";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-interface Props {}
-
 const GET_CARDS = gql`
   query getCards {
     cards {
@@ -16,7 +14,7 @@ const GET_CARDS = gql`
   }
 `;
 
-const Cards: React.FC<Props> = () => {
+const Cards: React.FC = () => {
   const { loading, error, data } = useQuery(GET_CARDS);
 
   if (loading) return <h1>Loading...</h1>;
@@ -28,7 +26,7 @@ const Cards: React.FC<Props> = () => {
     <div className="container">
       <h1>Your current credit cards</h1>
       <div className="columns">
-        {cards.map(card => (
+        {cards.map((card) => (
           <div className="column" key={card._id}>
             <div className="card">
               <h2>{card.vendor}</h2>

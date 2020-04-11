@@ -11,11 +11,9 @@ const Budget: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = React.useState(
     new Date().getMonth() + 1
   );
-  const [selectedYear, setSelectedYear] = React.useState(
-    new Date().getFullYear()
-  );
+  const [selectedYear] = React.useState(new Date().getFullYear());
 
-  const { loading, error, data } = useQuery(GET_LINE_ITEMS);
+  const { loading, data } = useQuery(GET_LINE_ITEMS);
 
   // React.useEffect(() => {
   //   loadLineItems({ month: selectedMonth, year: selectedYear }).catch(error => {
@@ -43,7 +41,7 @@ const Budget: React.FC = () => {
           {monthNames.map((month, index) => (
             <li
               key={month}
-              onClick={() => setSelectedMonth(index + 1)}
+              onClick={(): void => setSelectedMonth(index + 1)}
               className={selectedMonth == index + 1 ? "is-active" : ""}
             >
               <a>{month}</a>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 // Components
 import Input from "../common/forms/input";
 import SelectInput from "../common/forms/select-input";

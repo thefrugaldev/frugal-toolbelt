@@ -15,14 +15,12 @@ const LineItemPage: React.FC = () => {
   const [saving, setSaving] = useState(false);
   const router = useRouter();
 
-  const { loading, error, data } = useQuery(GET_CATEGORIES);
+  const { loading, data } = useQuery(GET_CATEGORIES);
   const [saveLineItem] = useMutation(CREATE_LINE_ITEM);
 
-  const handleChange = (event: React.FormEvent<any>) => {
-    let { name, type, value } = event.currentTarget;
-
-    // tslint:disable-next-line:no-console
-    console.log(`changing ${name} to ${value}`);
+  const handleChange = (event: React.FormEvent<any>): void => {
+    let { value } = event.currentTarget;
+    const { name } = event.currentTarget;
 
     switch (typeof lineItem[name]) {
       case "number":
@@ -30,6 +28,7 @@ const LineItemPage: React.FC = () => {
         break;
       case "boolean":
         value = value == "true";
+        break;
       default:
         break;
     }
@@ -40,7 +39,7 @@ const LineItemPage: React.FC = () => {
     }));
   };
 
-  const formIsValid = () => {
+  const formIsValid = (): boolean => {
     const { title, amount, date, category, isSavings } = lineItem;
     const errors: any = {};
 
@@ -55,7 +54,7 @@ const LineItemPage: React.FC = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSave = (event) => {
+  const handleSave = (event): void => {
     event.preventDefault();
 
     if (!formIsValid()) return;

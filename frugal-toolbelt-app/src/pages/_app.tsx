@@ -12,10 +12,10 @@ import "react-toastify/dist/ReactToastify.css";
 import "flatpickr/dist/flatpickr.min.css";
 
 export default class FrugalToolbeltApp extends App {
-  render() {
+  render(): JSX.Element {
     const { Component, pageProps, router } = this.props;
 
-    const onRedirectCallback = appState => {
+    const onRedirectCallback = (appState): void => {
       window.location =
         appState && appState.targetUrl ? appState.targetUrl : "/";
     };

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import flatpickr from "flatpickr";
 
 interface Props {
@@ -15,8 +15,7 @@ const DateInput: React.FC<Props> = ({
   label,
   onChange,
   placeholder,
-  value,
-  error
+  error,
 }) => {
   const datepicker = React.useRef();
 
@@ -27,10 +26,10 @@ const DateInput: React.FC<Props> = ({
         onChange({
           currentTarget: {
             name: instance.element.name,
-            value: dateStr
-          }
+            value: dateStr,
+          },
         });
-      }
+      },
     });
   }, []);
 
@@ -54,7 +53,7 @@ const DateInput: React.FC<Props> = ({
           className={inputClass}
           id="datepicker"
           placeholder={placeholder}
-          onChange={() => {}}
+          // onChange={(): void => {}}
         />
         {error && <p className="help is-danger">{error}</p>}
       </div>

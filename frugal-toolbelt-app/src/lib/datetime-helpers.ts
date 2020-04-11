@@ -10,28 +10,25 @@ const monthNames: Array<string> = [
   "September",
   "October",
   "November",
-  "December"
+  "December",
 ];
 
-const getDisplayFormattedDate = (dateAsString: string) => {
-  const date = getDateProps(dateAsString);
-  return `${date.month}/${date.day}/${date.year}`;
-};
-
-const getDateProps = (dateAsString: string) => {
+const getDateProps = (dateAsString: string): any => {
   const date = new Date(dateAsString);
   const year = date.getFullYear();
   const month = (1 + date.getMonth()).toString().padStart(2, "0");
-  const day = date
-    .getDate()
-    .toString()
-    .padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
 
   return {
     month,
     day,
-    year
+    year,
   };
+};
+
+const getDisplayFormattedDate = (dateAsString: string): string => {
+  const date = getDateProps(dateAsString);
+  return `${date.month}/${date.day}/${date.year}`;
 };
 
 export { monthNames, getDisplayFormattedDate };

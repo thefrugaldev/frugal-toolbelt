@@ -16,9 +16,9 @@ const LineItemList: React.FC<Props> = ({ lineItems }) => {
   const [activeModal, setActiveModal] = useState(false);
   const [modalTitle, setModalTitle] = useState();
   const [modalBody, setModalBody] = useState();
-  const [sortedProperty, setSortedProperty] = useState("");
+  // const [sortedProperty, setSortedProperty] = useState("");
 
-  const handleInfoClick = budget => {
+  const handleInfoClick = (budget): void => {
     setModalTitle(budget.title);
     setModalBody(budget.description);
     setActiveModal(true);
@@ -47,7 +47,7 @@ const LineItemList: React.FC<Props> = ({ lineItems }) => {
             <p className="modal-card-title">{modalTitle}</p>
             <button
               className="delete"
-              onClick={() => setActiveModal(false)}
+              onClick={(): void => setActiveModal(false)}
               aria-label="close"
             ></button>
           </header>
@@ -94,7 +94,7 @@ const LineItemList: React.FC<Props> = ({ lineItems }) => {
                   {lineItem.description && (
                     <span className="icon has-text-info">
                       <FontAwesomeIcon
-                        onClick={() => handleInfoClick(lineItem)}
+                        onClick={(): void => handleInfoClick(lineItem)}
                         icon={faInfoCircle}
                       />
                     </span>

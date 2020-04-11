@@ -16,11 +16,10 @@ const SelectInput: FC<Props> = ({
   name,
   label,
   onChange,
-  placeholder,
   value,
   error,
   defaultOption,
-  options
+  options,
 }) => {
   let selectClass = `select is-fullwidth`;
   if (error && error.length > 0) {
@@ -43,7 +42,7 @@ const SelectInput: FC<Props> = ({
             className="form-control"
           >
             <option value="">{defaultOption}</option>
-            {options.map(option => {
+            {options.map((option) => {
               return (
                 <option key={option.value} value={option.value}>
                   {option.text}

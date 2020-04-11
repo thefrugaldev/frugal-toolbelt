@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlusSquare,
-  faMinusSquare
+  faMinusSquare,
 } from "@fortawesome/free-regular-svg-icons";
 
 const BudgetPageFooter: React.FC = () => {
@@ -13,7 +13,7 @@ const BudgetPageFooter: React.FC = () => {
     <div className="level">
       <div
         className={`dropdown ${activeDropdown ? "is-active" : ""}`}
-        onClick={() => setActiveDropdown(!activeDropdown)}
+        onClick={(): void => setActiveDropdown(!activeDropdown)}
       >
         <div className="dropdown-trigger">
           <button
