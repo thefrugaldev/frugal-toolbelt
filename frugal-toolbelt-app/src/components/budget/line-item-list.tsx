@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faInfoCircle,
+  faSortUp,
+  faSortDown,
+} from "@fortawesome/free-solid-svg-icons";
 import LineItem from "../../interfaces/LineItem";
 import { getDisplayFormattedDate } from "../../lib/datetime-helpers";
-// Utils
-// import { getDisplayFormattedDate } from "../../utils/datetime-helpers";
+import useSort from "../../hooks/use-sort";
 
 interface Props {
   lineItems: Array<LineItem>;
@@ -16,27 +19,18 @@ const LineItemList: React.FC<Props> = ({ lineItems, onDeleteClick }) => {
   const [activeModal, setActiveModal] = useState(false);
   const [modalTitle, setModalTitle] = useState();
   const [modalBody, setModalBody] = useState();
-  // const [sortedProperty, setSortedProperty] = useState("");
+  const { sortedData, ...sortControls } = useSort(lineItems, "category.name");
+
+  const handleSorting = (sortKey: string): void => {
+    sortControls.setSortKey(sortKey);
+    sortControls.toggleAscending();
+  };
 
   const handleInfoClick = (budget): void => {
     setModalTitle(budget.title);
     setModalBody(budget.description);
     setActiveModal(true);
   };
-
-  //   const sortByType = key => {
-  //     key === sortedProperty ? sortDescending(key) : sortAscending(key);
-  //   };
-
-  //   const sortAscending = key => {
-  //     dispatch(sortLineItems(key));
-  //     setSortedProperty(key);
-  //   };
-
-  //   const sortDescending = key => {
-  //     dispatch(sortLineItems(key, "desc"));
-  //     setSortedProperty("");
-  //   };
 
   return (
     <>
@@ -54,22 +48,28 @@ const LineItemList: React.FC<Props> = ({ lineItems, onDeleteClick }) => {
           <section className="modal-card-body">{modalBody}</section>
         </div>
       </div>
-      <table className="table is-fullwidth">
+      <table className="table is-fullwidth is-bordered">
         <thead>
           <tr>
-            {/* <th onClick={() => sortByType("title")}>Title</th> */}
-            <th>Title</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Date</th>
-            {/* <th onClick={() => sortByType("amount")}>Amount</th>
-            <th onClick={() => sortByType("date")}>Date</th> */}
+            <th onClick={() => handleSorting("title")}>
+              Title{" "}
+              <span className="icon is-pulled-right">
+                {sortControls.isAscending ? (
+                  <FontAwesomeIcon icon={faSortUp} />
+                ) : (
+                  <FontAwesomeIcon icon={faSortDown} />
+                )}
+              </span>
+            </th>
+            <th onClick={() => handleSorting("category.name")}>Category</th>
+            <th onClick={() => handleSorting("amount")}>Amount</th>
+            <th onClick={() => handleSorting("date")}>Date</th>
             <th>Notes</th>
             <th />
           </tr>
         </thead>
         <tbody>
-          {lineItems.map((lineItem: LineItem) => {
+          {sortedData.map((lineItem: LineItem) => {
             return (
               <tr key={lineItem._id}>
                 <td>
