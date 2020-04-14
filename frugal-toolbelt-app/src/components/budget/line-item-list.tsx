@@ -12,7 +12,7 @@ interface Props {
   onDeleteClick?: Function;
 }
 
-const LineItemList: React.FC<Props> = ({ lineItems }) => {
+const LineItemList: React.FC<Props> = ({ lineItems, onDeleteClick }) => {
   const [activeModal, setActiveModal] = useState(false);
   const [modalTitle, setModalTitle] = useState();
   const [modalBody, setModalBody] = useState();
@@ -103,7 +103,7 @@ const LineItemList: React.FC<Props> = ({ lineItems }) => {
                 <td>
                   <button
                     className="button is-danger"
-                    // onClick={() => onDeleteClick(lineItem)}
+                    onClick={() => onDeleteClick(lineItem)}
                   >
                     Delete
                   </button>

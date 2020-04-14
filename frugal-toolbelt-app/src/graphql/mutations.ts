@@ -17,3 +17,15 @@ export const CREATE_CATEGORY = gql`
     }
   }
 `;
+
+export const DELETE_LINE_ITEM = gql`
+  mutation DeleteLineItem($id: ID!) {
+    deleteLineItem(id: $id)
+  }
+`;
+
+export const DELETE_CATEGORY = gql`
+  mutation DeleteCategory($id: ID!) {
+    deleteCategory(id: $id)
+  }
+`;

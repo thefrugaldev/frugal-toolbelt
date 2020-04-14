@@ -8,14 +8,15 @@ export const resolvers = {
     },
     lineItem: async (root: any, args: { id: string }) => {
       return await LineItemService.fetchLineItemByIdAsync(args.id);
-    }
+    },
   },
   Mutation: {
     createLineItem: async (root: any, args: { lineItem: LineItem }) => {
-      // tslint:disable-next-line:no-console
-      console.log("Line Item: ", args.lineItem);
-
       return await LineItemService.createLineItemAsync(args.lineItem);
-    }
-  }
+    },
+    deleteLineItem: async (root: any, args: { id: string }) => {
+      const result = await LineItemService.deleteLineItemAsync(args.id);
+      return result === 204;
+    },
+  },
 };

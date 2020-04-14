@@ -9,11 +9,15 @@ export const resolvers = {
     // TODO: Create route in api
     category: async (root: any, args: { id: string }) => {
       return await CategoryService.fetchCategoryByIdAsync(args.id);
-    }
+    },
   },
   Mutation: {
     createCategory: async (root: any, args: { category: Category }) => {
       return await CategoryService.createCategoryAsync(args.category);
-    }
-  }
+    },
+    deleteCategory: async (root: any, args: { id: string }) => {
+      const status = await CategoryService.deleteCategoryAsync(args.id);
+      return status === 204;
+    },
+  },
 };

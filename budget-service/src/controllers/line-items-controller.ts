@@ -54,7 +54,7 @@ const updateLineItemAsync = async (
     req.body,
     {
       new: true, // return the new budget instead of the old one
-      runValidators: true
+      runValidators: true,
     }
   ).exec();
 
@@ -68,7 +68,7 @@ const deleteLineItemAsync = async (
 ) => {
   await LineItem.findByIdAndDelete(req.params.id);
 
-  res.send(204);
+  res.sendStatus(204);
 };
 
 export default {
@@ -76,5 +76,5 @@ export default {
   getLineItemByIdAsync,
   createLineItemAsync,
   updateLineItemAsync,
-  deleteLineItemAsync
+  deleteLineItemAsync,
 };

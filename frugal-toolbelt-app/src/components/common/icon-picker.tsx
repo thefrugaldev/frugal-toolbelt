@@ -15,19 +15,11 @@ const IconPicker: React.FC<Props> = ({ onIconSelection }) => {
   const [activeModal, setActiveModal] = useState(false);
 
   useEffect(() => {
-    console.log(iconNames);
-  }, []);
-
-  useEffect(() => {
-    console.log("rendering icon picker component");
-
     library.add(fas);
     setIconPack(Object.values(fas));
   }, []);
 
   useEffect(() => {
-    console.log("icon pack changed: ", iconPack);
-
     iconPack.forEach((icon) => {
       setIconNames((prevNames) => [...prevNames, icon.iconName]);
     });

@@ -23,6 +23,7 @@ export const typeDef = gql`
 
   extend type Mutation {
     createLineItem(lineItem: CreateLineItemInput!): LineItem!
+    deleteLineItem(id: ID!): Boolean
   }
 
   extend type Query {

@@ -1,11 +1,15 @@
 import React from "react";
+import { toast } from "react-toastify";
 import { requireUser } from "../../lib/auth0-spa";
 import { monthNames } from "../../lib/datetime-helpers";
-import { useQuery } from "react-apollo";
+import { useQuery, useMutation } from "react-apollo";
 import { GET_LINE_ITEMS } from "../../graphql/queries";
 // Components
 import LineItemList from "../../components/budget/line-item-list";
 import BudgetPageFooter from "../../components/budget/footer";
+import { DELETE_LINE_ITEM } from "../../graphql/mutations";
+// Interfaces
+import LineItem from "../../interfaces/LineItem";
 
 const Budget: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = React.useState(
@@ -13,7 +17,8 @@ const Budget: React.FC = () => {
   );
   const [selectedYear] = React.useState(new Date().getFullYear());
 
-  const { loading, data } = useQuery(GET_LINE_ITEMS);
+  const { loading, data, refetch } = useQuery(GET_LINE_ITEMS);
+  const [deleteLineItem] = useMutation(DELETE_LINE_ITEM);
 
   // React.useEffect(() => {
   //   loadLineItems({ month: selectedMonth, year: selectedYear }).catch(error => {
@@ -24,14 +29,15 @@ const Budget: React.FC = () => {
   //   });
   // }, [selectedMonth]);
 
-  // const handleDeleteBudgetAsync = async budget => {
-  //   try {
-  //     await deleteLineItem(budget);
-  //     toast.success("Budget Deleted");
-  //   } catch (error) {
-  //     toast.error(`Delete Failed. ${error}`, { autoClose: false });
-  //   }
-  // };
+  const handleDeleteLineItemAsync = async (lineItem: LineItem) => {
+    try {
+      await deleteLineItem({ variables: { id: lineItem._id } });
+      toast.success("Budget Deleted");
+      refetch();
+    } catch (error) {
+      toast.error(`Failed to delete line item. ${error}`);
+    }
+  };
 
   return (
     <div className="container">
@@ -52,7 +58,7 @@ const Budget: React.FC = () => {
       {!loading ? (
         <>
           <LineItemList
-            // onDeleteClick={handleDeleteBudgetAsync}
+            onDeleteClick={handleDeleteLineItemAsync}
             lineItems={data.lineItems}
           />
           <BudgetPageFooter />

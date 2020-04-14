@@ -6,8 +6,7 @@ const getCategoriesAsync = async (
   req: express.Request,
   res: express.Response
 ) => {
-  // const categories = await Category.find({ isActive: true });
-  const categories = await Category.find({});
+  const categories = await Category.find({ isActive: true });
 
   res.send(categories);
 };
@@ -40,5 +39,5 @@ const deleteCategoryAsync = async (
 export default {
   getCategoriesAsync,
   createCategoryAsync,
-  deleteCategoryAsync
+  deleteCategoryAsync,
 };
