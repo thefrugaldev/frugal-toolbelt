@@ -8,11 +8,14 @@ const getLineItemsAsync = async (
   res: express.Response
 ) => {
   const query: any = {};
-  Object.keys(req.query).forEach((key) => {
-    query[key] = ["day", "month", "year"].includes(key)
-      ? parseInt(req.query[key], 10)
-      : req.query[key];
-  });
+
+  if (req.query) {
+    Object.keys(req.query).forEach((key) => {
+      query[key] = ["day", "month", "year"].includes(key)
+        ? parseInt(req.query[key], 10)
+        : req.query[key];
+    });
+  }
 
   const lineItems = await fetchLineItems(query);
 

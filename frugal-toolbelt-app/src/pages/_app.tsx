@@ -24,6 +24,7 @@ export default class FrugalToolbeltApp extends App {
       <ApolloProvider client={graphqlClient}>
         <Head>
           <title>Frugal Toolbelt Application</title>
+          <link rel="icon" href="/favicon.png" />
         </Head>
         <Auth0Provider
           domain={process.env.AUTH0_DOMAIN}

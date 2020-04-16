@@ -20,11 +20,11 @@ export const formatGraphQLErrors = (error: any) => {
 
 // TODO: Build Tests
 export const buildQueryString = (filters: LineItemFilters): string => {
+  if (!filters) return "";
+
   let queryString = "?";
   const filtersArray = Object.keys(filters);
   const firstItem = filtersArray[0];
-
-  if (filtersArray.length === 0) return "";
 
   filtersArray.forEach((key) => {
     queryString =
