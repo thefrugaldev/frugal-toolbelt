@@ -8,6 +8,7 @@ import { GET_LINE_ITEMS_BY_DATE } from "../../graphql/queries";
 import LineItemList from "../../components/budget/line-item-list";
 import BudgetPageFooter from "../../components/budget/footer";
 import { DELETE_LINE_ITEM } from "../../graphql/mutations";
+import Spinner from "../../components/common/spinner";
 // Interfaces
 import LineItem from "../../interfaces/LineItem";
 
@@ -61,26 +62,10 @@ const Budget: React.FC = () => {
           <BudgetPageFooter />
         </>
       ) : (
-        <></>
-      )}
-      {/* {loading ? (
+        <>
           <Spinner />
-        ) : lineItems.length ? (
-          <>
-            <LineItemsList
-              onDeleteClick={handleDeleteBudgetAsync}
-              lineItems={lineItems}
-            />
-  
-            <BudgetsPageFooter />
-          </>
-        ) : (
-          <NoBudgetNotification
-            month={selectedMonth}
-            year={selectedYear}
-            categories={categories}
-          />
-        )} */}
+        </>
+      )}
     </div>
   );
 };

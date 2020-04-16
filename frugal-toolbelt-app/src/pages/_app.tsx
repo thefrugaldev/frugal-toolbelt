@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "bulma/css/bulma.css";
 import "react-toastify/dist/ReactToastify.css";
 import "flatpickr/dist/flatpickr.min.css";
+// import "../styles/variables.scss";
 
 export default class FrugalToolbeltApp extends App {
   render(): JSX.Element {
