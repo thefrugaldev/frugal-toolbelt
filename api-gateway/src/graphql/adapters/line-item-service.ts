@@ -1,12 +1,15 @@
 import axios from "axios";
+import { buildQueryString } from "./../helpers/api-utils";
 import LineItem from "../interfaces/LineItem";
 
 const BUDGET_SERVICE_URI = "http://budget-service:8081";
 
 export default class LineItemService {
-  static async fetchLineItemsAsync() {
+  static async fetchLineItemsAsync(filter?: LineItemFilters) {
+    const queryString = buildQueryString(filter);
+
     const body = await axios
-      .get(`${BUDGET_SERVICE_URI}/line-items`)
+      .get(`${BUDGET_SERVICE_URI}/line-items${queryString}`)
       .then((res) => {
         return res.data;
       })

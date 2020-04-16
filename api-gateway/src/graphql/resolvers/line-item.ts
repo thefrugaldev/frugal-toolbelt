@@ -9,6 +9,12 @@ export const resolvers = {
     lineItem: async (root: any, args: { id: string }) => {
       return await LineItemService.fetchLineItemByIdAsync(args.id);
     },
+    filterLineItemsByDate: async (
+      root: any,
+      args: { day: string; month: string; year: string }
+    ) => {
+      return await LineItemService.fetchLineItemsAsync(args);
+    },
   },
   Mutation: {
     createLineItem: async (root: any, args: { lineItem: LineItem }) => {

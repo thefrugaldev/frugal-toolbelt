@@ -29,5 +29,6 @@ export const typeDef = gql`
   extend type Query {
     lineItems: [LineItem!]!
     lineItem(id: ID!): LineItem!
+    filterLineItemsByDate(day: Int, month: Int, year: Int): [LineItem!]!
   }
 `;

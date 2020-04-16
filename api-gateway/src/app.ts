@@ -5,14 +5,14 @@ import express from "express";
 import typeDefs from "./graphql/schema";
 import resolvers from "./graphql/resolvers";
 import { makeExecutableSchema } from "apollo-server";
-import formatGraphQLErrors from "./graphql/helpers/error-handlers";
+import { formatGraphQLErrors } from "./graphql/helpers/api-utils";
 
 const apolloServer = new ApolloServer({
   formatError: formatGraphQLErrors,
   schema: makeExecutableSchema({
     typeDefs,
-    resolvers
-  })
+    resolvers,
+  }),
 });
 
 const app = express();
@@ -39,7 +39,7 @@ if (isDevelopment) {
                 `🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → Origin ${origin} not allowed by CORS`
               )
             ),
-      credentials: true
+      credentials: true,
     })
   );
 }

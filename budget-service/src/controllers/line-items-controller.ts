@@ -1,3 +1,4 @@
+import { fetchLineItems } from "../repositories/line-items-repository";
 import LineItem from "../models/LineItem";
 import express from "express";
 
@@ -7,15 +8,13 @@ const getLineItemsAsync = async (
   res: express.Response
 ) => {
   const query: any = {};
+  Object.keys(req.query).forEach((key) => {
+    query[key] = ["day", "month", "year"].includes(key)
+      ? parseInt(req.query[key], 10)
+      : req.query[key];
+  });
 
-  // TODO: REFACTOR
-  if (req.query) {
-    for (const key in req.query) {
-      if (req.query[key] !== "") query[key] = req.query[key];
-    }
-  }
-
-  const lineItems = await LineItem.find(query).populate("category");
+  const lineItems = await fetchLineItems(query);
 
   res.send(lineItems);
 };
