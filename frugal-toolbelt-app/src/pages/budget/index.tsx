@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { requireUser } from "../../lib/auth0-spa";
 import { monthNames } from "../../lib/datetime-helpers";
 import { useQuery, useMutation } from "react-apollo";
-import { GET_LINE_ITEMS } from "../../graphql/queries";
+import { GET_LINE_ITEMS_BY_DATE } from "../../graphql/queries";
 // Components
 import LineItemList from "../../components/budget/line-item-list";
 import BudgetPageFooter from "../../components/budget/footer";
@@ -17,17 +17,14 @@ const Budget: React.FC = () => {
   );
   const [selectedYear] = React.useState(new Date().getFullYear());
 
-  const { loading, data, refetch } = useQuery(GET_LINE_ITEMS);
   const [deleteLineItem] = useMutation(DELETE_LINE_ITEM);
+  const { loading, data, refetch } = useQuery(GET_LINE_ITEMS_BY_DATE, {
+    variables: { month: selectedMonth, year: selectedYear },
+  });
 
-  // React.useEffect(() => {
-  //   loadLineItems({ month: selectedMonth, year: selectedYear }).catch(error => {
-  //     console.log(`Loading budgets failed ${error}`);
-  //   });
-  //   loadCategories().catch(error => {
-  //     console.log(`Loading categories failed ${error}`);
-  //   });
-  // }, [selectedMonth]);
+  React.useEffect(() => {
+    refetch({ month: selectedMonth, year: selectedYear });
+  }, [selectedMonth]);
 
   const handleDeleteLineItemAsync = async (lineItem: LineItem) => {
     try {
@@ -59,7 +56,7 @@ const Budget: React.FC = () => {
         <>
           <LineItemList
             onDeleteClick={handleDeleteLineItemAsync}
-            lineItems={data.lineItems}
+            lineItems={data.filterLineItemsByDate}
           />
           <BudgetPageFooter />
         </>
