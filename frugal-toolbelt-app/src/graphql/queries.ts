@@ -19,6 +19,22 @@ export const GET_LINE_ITEMS = gql`
   }
 `;
 
+export const GET_LINE_ITEM = gql`
+  query GetLineItem($id: ID!) {
+    lineItem(id: $id) {
+      _id
+      title
+      category {
+        _id
+        name
+      }
+      description
+      amount
+      isSavings
+    }
+  }
+`;
+
 export const GET_LINE_ITEMS_BY_DATE = gql`
   query GetLineItemsByDate($month: Int, $year: Int) {
     filterLineItemsByDate(month: $month, year: $year) {

@@ -73,7 +73,10 @@ const LineItemList: React.FC<Props> = ({ lineItems, onDeleteClick }) => {
             return (
               <tr key={lineItem._id}>
                 <td>
-                  <Link href={`/budget/line-item/${lineItem._id}`}>
+                  <Link
+                    href="/budget/line-item/[id]"
+                    as={`/budget/line-item/${lineItem._id}`}
+                  >
                     <a>{lineItem.title}</a>
                   </Link>
                 </td>

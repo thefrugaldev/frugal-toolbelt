@@ -1,22 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from "react-apollo";
-import { GET_CATEGORIES } from "../../graphql/queries";
-import { CREATE_LINE_ITEM } from "../../graphql/mutations";
+import { GET_CATEGORIES, GET_LINE_ITEM } from "../../../graphql/queries";
+import { CREATE_LINE_ITEM } from "../../../graphql/mutations";
 import { useRouter } from "next/router";
 // Components
-import LineItemForm from "../../components/budget/line-item-form";
+import LineItemForm from "../../../components/budget/line-item-form";
 // Interfaces
-import LineItem, { NewLineItem } from "../../interfaces/LineItem";
+import LineItem, { NewLineItem } from "../../../interfaces/LineItem";
 
-const LineItemPage: React.FC = () => {
+const LineItemPage: React.FC<{ id: string }> = ({ id }) => {
   const [lineItem, setLineItem] = useState<LineItem>(NewLineItem);
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
   const router = useRouter();
 
-  const { loading, data } = useQuery(GET_CATEGORIES);
+  const lineItemQuery: { loading; data } = useQuery(GET_LINE_ITEM, {
+    variables: {
+      id,
+    },
+  });
+  const categoriesQuery: { loading; data } = useQuery(GET_CATEGORIES);
   const [saveLineItem] = useMutation(CREATE_LINE_ITEM);
+
+  useEffect(() => {
+    if (!lineItemQuery.loading && lineItemQuery.data)
+      setLineItem(lineItemQuery.data.lineItem);
+  }, [lineItemQuery.loading]);
 
   const handleChange = (event: React.FormEvent<any>): void => {
     let { value } = event.currentTarget;
@@ -75,14 +85,14 @@ const LineItemPage: React.FC = () => {
       });
   };
 
-  return loading ? (
+  return categoriesQuery.loading ? (
     <></>
   ) : (
     <div className="container">
       <LineItemForm
         lineItem={lineItem}
         errors={errors}
-        categories={data.categories}
+        categories={categoriesQuery.data.categories}
         onChange={handleChange}
         onSave={handleSave}
         saving={saving}
@@ -90,9 +100,5 @@ const LineItemPage: React.FC = () => {
     </div>
   );
 };
-
-// export function getLineItemById(lineItems, id) {
-//   return lineItems.find(lineItem => lineItem._id === id) || null;
-// }
 
 export default LineItemPage;
