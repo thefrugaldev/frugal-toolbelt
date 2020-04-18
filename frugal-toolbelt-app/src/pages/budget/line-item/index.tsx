@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from "react-apollo";
-import { GET_CATEGORIES, GET_LINE_ITEM } from "../../../graphql/queries";
+import { GET_LINE_ITEM } from "../../../graphql/queries";
 import { UPSERT_LINE_ITEM } from "../../../graphql/mutations";
 import { useRouter } from "next/router";
 // Components
@@ -15,18 +15,21 @@ const LineItemPage: React.FC<{ id: string }> = ({ id }) => {
   const [saving, setSaving] = useState(false);
   const router = useRouter();
 
-  const lineItemQuery: { loading; data } = useQuery(GET_LINE_ITEM, {
+  const { loading, data } = useQuery(GET_LINE_ITEM, {
     variables: {
       id,
     },
+    skip: !id,
   });
-  const categoriesQuery: { loading; data } = useQuery(GET_CATEGORIES);
   const [saveLineItem] = useMutation(UPSERT_LINE_ITEM);
 
   useEffect(() => {
-    if (!lineItemQuery.loading && lineItemQuery.data)
-      setLineItem(lineItemQuery.data.lineItem);
-  }, [lineItemQuery.loading]);
+    if (!loading && data)
+      setLineItem({
+        ...data.lineItem,
+        category: data.lineItem.category._id,
+      });
+  }, [loading]);
 
   const handleChange = (event: React.FormEvent<any>): void => {
     let { value } = event.currentTarget;
@@ -85,14 +88,11 @@ const LineItemPage: React.FC<{ id: string }> = ({ id }) => {
       });
   };
 
-  return categoriesQuery.loading ? (
-    <></>
-  ) : (
+  return (
     <div className="container">
       <LineItemForm
         lineItem={lineItem}
         errors={errors}
-        categories={categoriesQuery.data.categories}
         onChange={handleChange}
         onSave={handleSave}
         saving={saving}
