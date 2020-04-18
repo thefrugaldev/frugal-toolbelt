@@ -49,13 +49,13 @@ const useSort = (unsortedArray: Array<any>, sortKey: string): any => {
   return {
     ...state,
     sortedData,
-    toggleAscending: () => {
+    toggleAscending: (): void => {
       setState((state) => ({
         ...state,
         isAscending: !state.isAscending,
       }));
     },
-    setSortKey: (sortKey: string) =>
+    setSortKey: (sortKey: string): void =>
       setState((state) => ({ ...state, sortKey })),
   };
 };

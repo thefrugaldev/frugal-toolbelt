@@ -27,7 +27,9 @@ const Budget: React.FC = () => {
     refetch({ month: selectedMonth, year: selectedYear });
   }, [selectedMonth]);
 
-  const handleDeleteLineItemAsync = async (lineItem: LineItem) => {
+  const handleDeleteLineItemAsync = async (
+    lineItem: LineItem
+  ): Promise<void> => {
     try {
       await deleteLineItem({ variables: { id: lineItem._id } });
       toast.success("Budget Deleted");

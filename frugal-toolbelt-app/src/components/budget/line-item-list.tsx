@@ -51,7 +51,7 @@ const LineItemList: React.FC<Props> = ({ lineItems, onDeleteClick }) => {
       <table className="table is-fullwidth is-bordered">
         <thead>
           <tr>
-            <th onClick={() => handleSorting("title")}>
+            <th onClick={(): void => handleSorting("title")}>
               Title{" "}
               <span className="icon is-pulled-right">
                 {sortControls.isAscending ? (
@@ -61,9 +61,11 @@ const LineItemList: React.FC<Props> = ({ lineItems, onDeleteClick }) => {
                 )}
               </span>
             </th>
-            <th onClick={() => handleSorting("category.name")}>Category</th>
-            <th onClick={() => handleSorting("amount")}>Amount</th>
-            <th onClick={() => handleSorting("date")}>Date</th>
+            <th onClick={(): void => handleSorting("category.name")}>
+              Category
+            </th>
+            <th onClick={(): void => handleSorting("amount")}>Amount</th>
+            <th onClick={(): void => handleSorting("date")}>Date</th>
             <th>Notes</th>
             <th />
           </tr>
@@ -106,7 +108,7 @@ const LineItemList: React.FC<Props> = ({ lineItems, onDeleteClick }) => {
                 <td>
                   <button
                     className="button is-danger"
-                    onClick={() => onDeleteClick(lineItem)}
+                    onClick={(): void => onDeleteClick(lineItem)}
                   >
                     Delete
                   </button>

@@ -1,3 +1,4 @@
+import React from "react";
 import LineItemPage from ".";
 import { GetServerSideProps } from "next";
 
@@ -7,4 +8,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default (props: { id: string }) => <LineItemPage {...props} />;
+const LineItemWrapper = (props: {
+  id: string;
+}): React.ReactElement<any, any> => <LineItemPage {...props} />;
+
+export default LineItemWrapper;
