@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from "react-apollo";
 import { GET_CATEGORIES, GET_LINE_ITEM } from "../../../graphql/queries";
-import { CREATE_LINE_ITEM } from "../../../graphql/mutations";
+import { UPSERT_LINE_ITEM } from "../../../graphql/mutations";
 import { useRouter } from "next/router";
 // Components
 import LineItemForm from "../../../components/budget/line-item-form";
@@ -21,7 +21,7 @@ const LineItemPage: React.FC<{ id: string }> = ({ id }) => {
     },
   });
   const categoriesQuery: { loading; data } = useQuery(GET_CATEGORIES);
-  const [saveLineItem] = useMutation(CREATE_LINE_ITEM);
+  const [saveLineItem] = useMutation(UPSERT_LINE_ITEM);
 
   useEffect(() => {
     if (!lineItemQuery.loading && lineItemQuery.data)
@@ -57,7 +57,7 @@ const LineItemPage: React.FC<{ id: string }> = ({ id }) => {
     if (!amount) errors.amount = "Amount is required";
     if (!date) errors.date = "Please select a date";
     if (!category) errors.category = "Please select a category";
-    if (!isSavings) errors.type = "Please choose an entry type";
+    if (isSavings === undefined) errors.type = "Please choose an entry type";
 
     setErrors(errors);
     // Form is valid if the errors object still has no properties

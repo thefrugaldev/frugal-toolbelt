@@ -55,6 +55,22 @@ export default class LineItemService {
     return body;
   }
 
+  static async updateLineItemAsync(lineItem: LineItem) {
+    const body = await axios
+      .put(`${BUDGET_SERVICE_URI}/line-items/${lineItem._id}`, lineItem)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((error) => {
+        // tslint:disable-next-line:no-console
+        console.error(
+          `🚸 🚨 🚸 🚨 🚸 🚨 🚸 🚨 → Error creating line item: ${error}`
+        );
+      });
+
+    return body;
+  }
+
   static async deleteLineItemAsync(id: string): Promise<number | void> {
     const status = await axios
       .delete(`${BUDGET_SERVICE_URI}/line-items/${id}`)

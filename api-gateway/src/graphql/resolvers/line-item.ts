@@ -17,8 +17,10 @@ export const resolvers = {
     },
   },
   Mutation: {
-    createLineItem: async (root: any, args: { lineItem: LineItem }) => {
-      return await LineItemService.createLineItemAsync(args.lineItem);
+    upsertLineItem: async (root: any, args: { lineItem: LineItem }) => {
+      return args.lineItem._id
+        ? await LineItemService.updateLineItemAsync(args.lineItem)
+        : await LineItemService.createLineItemAsync(args.lineItem);
     },
     deleteLineItem: async (root: any, args: { id: string }) => {
       const result = await LineItemService.deleteLineItemAsync(args.id);

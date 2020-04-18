@@ -31,6 +31,7 @@ export const GET_LINE_ITEM = gql`
       description
       amount
       isSavings
+      date
     }
   }
 `;

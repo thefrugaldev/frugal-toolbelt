@@ -11,7 +11,7 @@ export const typeDef = gql`
     date: Date!
   }
 
-  input CreateLineItemInput {
+  input UpsertLineItemInput {
     _id: ID
     title: String!
     category: ID
@@ -22,7 +22,7 @@ export const typeDef = gql`
   }
 
   extend type Mutation {
-    createLineItem(lineItem: CreateLineItemInput!): LineItem!
+    upsertLineItem(lineItem: UpsertLineItemInput!): LineItem!
     deleteLineItem(id: ID!): Boolean
   }
 

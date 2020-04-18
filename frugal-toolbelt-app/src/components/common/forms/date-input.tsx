@@ -16,12 +16,13 @@ const DateInput: React.FC<Props> = ({
   onChange,
   placeholder,
   error,
+  value,
 }) => {
   const datepicker = React.useRef();
 
   useEffect(() => {
     flatpickr(datepicker.current, {
-      defaultDate: new Date(),
+      defaultDate: value ? new Date(value) : new Date(),
       onChange: (selectedDates: any, dateStr: any, instance: any) => {
         onChange({
           currentTarget: {
@@ -31,7 +32,7 @@ const DateInput: React.FC<Props> = ({
         });
       },
     });
-  }, []);
+  }, [value]);
 
   let inputClass = "input";
   if (error && error.length > 0) {

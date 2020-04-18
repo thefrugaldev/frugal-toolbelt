@@ -1,9 +1,9 @@
 export default interface LineItem {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   isSavings: boolean;
-  //   category: ICategory;
+  category: string;
   amount: number;
   date?: Date;
 }
