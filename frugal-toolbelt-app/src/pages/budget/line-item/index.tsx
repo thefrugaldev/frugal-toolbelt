@@ -20,6 +20,7 @@ const LineItemPage: React.FC<{ id: string }> = ({ id }) => {
       id,
     },
     skip: !id,
+    fetchPolicy: "network-only",
   });
   const [saveLineItem] = useMutation(UPSERT_LINE_ITEM);
 
@@ -37,7 +38,7 @@ const LineItemPage: React.FC<{ id: string }> = ({ id }) => {
 
     switch (typeof lineItem[name]) {
       case "number":
-        value = parseInt(value);
+        value = parseFloat(value);
         break;
       case "boolean":
         value = value == "true";

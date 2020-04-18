@@ -6,7 +6,7 @@ export const typeDef = gql`
     title: String!
     category: Category
     description: String
-    amount: Int
+    amount: Float
     isSavings: Boolean
     date: Date!
   }
@@ -16,7 +16,7 @@ export const typeDef = gql`
     title: String!
     category: ID
     description: String
-    amount: Int
+    amount: Float
     isSavings: Boolean
     date: Date!
   }

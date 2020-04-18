@@ -13,11 +13,7 @@ export interface LineItem {
 export interface LineItemDocument extends Document, LineItem {}
 
 const setDecimalNumber = (val: number) => {
-  return (val * 100).toFixed(2);
-};
-
-const getDecimalNumber = (val: number) => {
-  return (val / 100).toFixed(2);
+  return val.toFixed(2);
 };
 
 const LineItemSchema: Schema = new Schema(
@@ -25,7 +21,7 @@ const LineItemSchema: Schema = new Schema(
     title: {
       type: String,
       trim: true,
-      required: "Please provide a title for this line item"
+      required: "Please provide a title for this line item",
     },
     description: { type: String, trim: true },
     isSavings: { type: Boolean, default: false },
@@ -34,10 +30,9 @@ const LineItemSchema: Schema = new Schema(
       type: Number,
       default: 0,
       set: setDecimalNumber,
-      get: getDecimalNumber
     },
     date: { type: Date, default: Date.now, required: true },
-    created: { type: Date, default: Date.now }
+    created: { type: Date, default: Date.now },
   },
   { toJSON: { getters: true }, toObject: { getters: true } }
 );
@@ -46,37 +41,10 @@ export const lineItemSchema = new mongoose.Schema(
   {
     created: {
       type: Date,
-      default: Date.now
-    }
+      default: Date.now,
+    },
   },
   { toJSON: { getters: true }, toObject: { getters: true } }
 );
-
-// lineItemSchema.pre("save", function() {
-//   const docToUpdate = this;
-
-//   updateDateProperties(docToUpdate);
-// });
-
-// lineItemSchema.pre("findOneAndUpdate", async function() {
-//   const docToUpdate = this._update;
-
-//   updateDateProperties(docToUpdate);
-// });
-
-// const updateDateProperties = (docToUpdate: ) => {
-//   const date = new Date(docToUpdate.date);
-
-//   docToUpdate.year = parseInt(date.getFullYear());
-//   docToUpdate.month = parseInt(
-//     (1 + date.getMonth()).toString().padStart(2, "0")
-//   );
-//   docToUpdate.day = parseInt(
-//     date
-//       .getDate()
-//       .toString()
-//       .padStart(2, "0")
-//   );
-// };
 
 export default mongoose.model<LineItemDocument>("LineItem", LineItemSchema);
