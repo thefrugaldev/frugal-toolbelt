@@ -7,10 +7,10 @@ import Navbar from "../components/common/navbar";
 import graphqlClient from "../api/graphql-client";
 import { ToastContainer } from "react-toastify";
 //Styles
-import "bulma/css/bulma.css";
+// import "bulma/css/bulma.css";
+import "../styles/bulma-override.scss";
 import "react-toastify/dist/ReactToastify.css";
 import "flatpickr/dist/flatpickr.min.css";
-// import "../styles/variables.scss";
 
 export default class FrugalToolbeltApp extends App {
   render(): JSX.Element {
