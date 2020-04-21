@@ -109,7 +109,7 @@ export const Auth0Provider: React.FunctionComponent<Auth0ProviderProps> = ({
         popupOpen,
         loginWithPopup,
         handleRedirectCallback,
-        getIdTokenClaims: (...p): Promise<IdToken> =>
+        getIdTokenClaims: (...p): Promise<any> =>
           auth0Client.getIdTokenClaims(...p),
         loginWithRedirect: (...p): Promise<void> =>
           auth0Client.loginWithRedirect(...p),

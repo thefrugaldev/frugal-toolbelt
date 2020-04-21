@@ -4,9 +4,9 @@ const withCss = require("@zeit/next-css");
 const withSass = require("@zeit/next-sass");
 const withFonts = require("next-fonts");
 
-module.exports = withCss(
-  withSass(
-    withFonts({
+module.exports = withFonts(
+  withCss(
+    withSass({
       exportTrailingSlash: true,
       webpack(config, options) {
         config.plugins.push(new webpack.EnvironmentPlugin(localEnv));

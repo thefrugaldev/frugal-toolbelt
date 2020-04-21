@@ -1,14 +1,13 @@
 @font-face {
   font-family: "Lato";
-  src: url("./fonts/Lato-Regular.ttf");
+  src: url("/fonts/Lato-Regular.ttf");
 }
 @font-face {
-  font-family: "Oswald";
-  src: url("./fonts/Oswald-Regular.ttf");
-  src: url("./fonts/Oswald-Medium.ttf");
+  font-family: "Source Sans Pro";
+  src: url("/fonts/SourceSansPro-SemiBold.ttf");
 }
 // Typography
-$font-heading: "Oswald", serif;
+$font-heading: "Source Sans Pro", serif;
 $font-sans-serif: "Lato", sans-serif;
 // Colors
 $viking: #59dec9;
@@ -25,6 +24,8 @@ Bulma Overrides
 *********
 ********/
 
+// Initial
+$family-sans-serif: $font-sans-serif;
 // Derived
 $primary: $viking;
 $info: $lavender;
@@ -32,4 +33,5 @@ $link: $mint;
 $text: $viking;
 $text-strong: $viking;
 $scheme-main: $midnight;
-// Generic
+// Title
+$title-family: $font-heading;
