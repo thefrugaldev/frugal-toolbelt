@@ -7,7 +7,7 @@ const BudgetPageFooter: React.FC = () => {
       <Link href="/budget/line-item">
         <a className="button is-primary is-light">Add New Entry</a>
       </Link>
-      <Link href="/budgets/reports">
+      <Link href="/budget/reports">
         <a className="button is-success is-light">View Reports</a>
       </Link>
       <Link href="/categories">
