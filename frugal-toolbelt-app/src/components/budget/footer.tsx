@@ -1,47 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlusSquare,
-  faMinusSquare,
-} from "@fortawesome/free-regular-svg-icons";
 
 const BudgetPageFooter: React.FC = () => {
-  const [activeDropdown, setActiveDropdown] = useState(false);
-
   return (
     <div className="level">
-      <div
-        className={`dropdown ${activeDropdown ? "is-active" : ""}`}
-        onClick={(): void => setActiveDropdown(!activeDropdown)}
-      >
-        <div className="dropdown-trigger">
-          <button
-            className="button is-primary is-light"
-            aria-haspopup="true"
-            aria-controls="add-budget-menu"
-          >
-            <span>Add New Entry</span>
-            <span className="icon is-small">
-              {activeDropdown ? (
-                <FontAwesomeIcon icon={faMinusSquare} />
-              ) : (
-                <FontAwesomeIcon icon={faPlusSquare} />
-              )}
-            </span>
-          </button>
-        </div>
-        <div className="dropdown-menu" id="add-budget-menu" role="menu">
-          <div className="dropdown-content">
-            <Link href={`/budget/line-item`}>
-              <a className="has-text-danger dropdown-item">Expense</a>
-            </Link>
-            <Link href={`/budget/line-item`}>
-              <a className="has-text-success dropdown-item">Savings</a>
-            </Link>
-          </div>
-        </div>
-      </div>
+      <Link href="/budget/line-item">
+        <a className="button is-primary is-light">Add New Entry</a>
+      </Link>
       <Link href="/budgets/reports">
         <a className="button is-success is-light">View Reports</a>
       </Link>

@@ -52,7 +52,7 @@ const IconPicker: React.FC<Props> = ({ onIconSelection }) => {
           <div className="modal-card-body">
             {iconNames.map((icon) => {
               return (
-                <span
+                <a
                   className="icon has-text-info is-large"
                   key={icon}
                   onClick={(): void => {
@@ -61,7 +61,7 @@ const IconPicker: React.FC<Props> = ({ onIconSelection }) => {
                   }}
                 >
                   <FontAwesomeIcon icon={icon} size="2x" />
-                </span>
+                </a>
               );
             })}
           </div>

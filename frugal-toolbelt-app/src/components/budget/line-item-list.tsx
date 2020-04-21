@@ -97,12 +97,12 @@ const LineItemList: React.FC<Props> = ({ lineItems, onDeleteClick }) => {
                 <td>{getDisplayFormattedDate(lineItem.date)}</td>
                 <td>
                   {lineItem.description && (
-                    <span className="icon has-text-info">
+                    <a className="icon has-text-info">
                       <FontAwesomeIcon
                         onClick={(): void => handleInfoClick(lineItem)}
                         icon={faInfoCircle}
                       />
-                    </span>
+                    </a>
                   )}
                 </td>
                 <td>
