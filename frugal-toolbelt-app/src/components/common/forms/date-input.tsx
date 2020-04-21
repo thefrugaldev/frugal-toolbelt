@@ -23,14 +23,15 @@ const DateInput: React.FC<Props> = ({
   useEffect(() => {
     flatpickr(datepicker.current, {
       defaultDate: value,
-      enableTime: true,
       altInput: true,
       altFormat: "m-d-Y",
       onChange: (selectedDates: Date[], dateStr: string, instance: any) => {
+        const selectedDate = selectedDates[0].toISOString();
+
         onChange({
           currentTarget: {
             name: instance.element.name,
-            value: dateStr,
+            value: selectedDate,
           },
         });
       },
