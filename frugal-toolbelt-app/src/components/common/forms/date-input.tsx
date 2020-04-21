@@ -6,7 +6,7 @@ interface Props {
   label?: string;
   onChange: (any) => void;
   placeholder?: string;
-  value: string;
+  value: Date;
   error?: string;
 }
 
@@ -22,8 +22,11 @@ const DateInput: React.FC<Props> = ({
 
   useEffect(() => {
     flatpickr(datepicker.current, {
-      defaultDate: value ? new Date(value) : new Date(),
-      onChange: (selectedDates: any, dateStr: any, instance: any) => {
+      defaultDate: value,
+      enableTime: true,
+      altInput: true,
+      altFormat: "m-d-Y",
+      onChange: (selectedDates: Date[], dateStr: string, instance: any) => {
         onChange({
           currentTarget: {
             name: instance.element.name,
@@ -54,7 +57,6 @@ const DateInput: React.FC<Props> = ({
           className={inputClass}
           id="datepicker"
           placeholder={placeholder}
-          // onChange={(): void => {}}
         />
         {error && <p className="help is-danger">{error}</p>}
       </div>

@@ -1,3 +1,9 @@
+interface DateProps {
+  day: string;
+  month: string;
+  year: number;
+}
+
 const monthNames: Array<string> = [
   "January",
   "February",
@@ -13,8 +19,7 @@ const monthNames: Array<string> = [
   "December",
 ];
 
-const getDateProps = (dateAsString: string): any => {
-  const date = new Date(dateAsString);
+const getDateProps = (date: Date): DateProps => {
   const year = date.getFullYear();
   const month = (1 + date.getMonth()).toString().padStart(2, "0");
   const day = date.getDate().toString().padStart(2, "0");
@@ -26,9 +31,9 @@ const getDateProps = (dateAsString: string): any => {
   };
 };
 
-const getDisplayFormattedDate = (dateAsString: string): string => {
-  const date = getDateProps(dateAsString);
-  return `${date.month}/${date.day}/${date.year}`;
+const getDisplayFormattedDate = (date: Date): string => {
+  const dateProps = getDateProps(new Date(date));
+  return `${dateProps.month}/${dateProps.day}/${dateProps.year}`;
 };
 
 export { monthNames, getDisplayFormattedDate };

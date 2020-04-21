@@ -6,7 +6,7 @@ export default interface LineItem {
   description: string;
   isSavings: boolean;
   amount: number;
-  date: string;
+  date: Date;
   category: Category;
 }
 
@@ -16,6 +16,6 @@ export const NewLineItem: LineItem = {
   description: "",
   isSavings: false,
   amount: 0,
-  date: new Date().toDateString(),
+  date: new Date(),
   category: null,
 };

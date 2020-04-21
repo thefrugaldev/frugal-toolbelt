@@ -24,7 +24,7 @@ const ReportsPage: React.FC<Props> = ({ year = new Date().getFullYear() }) => {
     }
   }, []);
 
-  const handleChange = (event: React.FormEvent<any>) => {
+  const handleChange = (event: React.FormEvent<any>): void => {
     const year = parseInt(event.currentTarget.value);
     setSelectedYear(year);
     refetch({ year });

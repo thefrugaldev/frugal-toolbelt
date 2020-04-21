@@ -28,7 +28,7 @@ const LineItemPage: React.FC<{ id: string }> = ({ id }) => {
     if (!loading && data)
       setLineItem({
         ...data.lineItem,
-        category: data.lineItem.category._id,
+        category: data.lineItem.category?._id,
       });
   }, [loading]);
 
