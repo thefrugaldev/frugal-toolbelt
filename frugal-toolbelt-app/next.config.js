@@ -6,7 +6,7 @@ const sass = require("@zeit/next-sass");
 const fonts = require("next-fonts");
 
 module.exports = compose([css, sass, fonts], {
-  exportTrailingSlash: true,
+  exportTrailingSlash: false,
   webpack(config) {
     config.plugins.push(new webpack.EnvironmentPlugin(localEnv));
 
