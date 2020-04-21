@@ -10,18 +10,52 @@ import LineItem from "../../interfaces/LineItem";
 import { getDisplayFormattedDate } from "../../lib/datetime-helpers";
 import useSort from "../../hooks/use-sort";
 
-interface Props {
+interface LineItemList {
   lineItems: Array<LineItem>;
   onDeleteClick?: Function;
 }
 
-const LineItemList: React.FC<Props> = ({ lineItems, onDeleteClick }) => {
+interface SortableHeaderCellProps {
+  title: string;
+  isAscending: boolean;
+  sortKey: string;
+  onSort: (
+    e: React.MouseEvent<HTMLTableHeaderCellElement, MouseEvent>,
+    sortKey: string
+  ) => void;
+}
+
+const SortableHeaderCell: React.FC<SortableHeaderCellProps> = ({
+  title,
+  isAscending,
+  sortKey,
+  onSort,
+}) => {
+  return (
+    <th onClick={(e): void => onSort(e, sortKey)}>
+      {title}
+      <span className={`icon is-pulled-right ${"is-sorted"}`}>
+        {isAscending ? (
+          <FontAwesomeIcon icon={faSortUp} />
+        ) : (
+          <FontAwesomeIcon icon={faSortDown} />
+        )}
+      </span>
+    </th>
+  );
+};
+
+const LineItemList: React.FC<LineItemList> = ({ lineItems, onDeleteClick }) => {
   const [activeModal, setActiveModal] = useState(false);
   const [modalTitle, setModalTitle] = useState();
   const [modalBody, setModalBody] = useState();
   const { sortedData, ...sortControls } = useSort(lineItems, "category.name");
 
-  const handleSorting = (sortKey: string): void => {
+  const handleSorting = (
+    e: React.MouseEvent<HTMLTableHeaderCellElement, MouseEvent>,
+    sortKey: string
+  ): void => {
+    console.log(e.currentTarget);
     sortControls.setSortKey(sortKey);
     sortControls.toggleAscending();
   };
@@ -51,21 +85,30 @@ const LineItemList: React.FC<Props> = ({ lineItems, onDeleteClick }) => {
       <table className="table is-fullwidth is-bordered">
         <thead>
           <tr>
-            <th onClick={(): void => handleSorting("title")}>
-              Title{" "}
-              <span className="icon is-pulled-right">
-                {sortControls.isAscending ? (
-                  <FontAwesomeIcon icon={faSortUp} />
-                ) : (
-                  <FontAwesomeIcon icon={faSortDown} />
-                )}
-              </span>
-            </th>
-            <th onClick={(): void => handleSorting("category.name")}>
-              Category
-            </th>
-            <th onClick={(): void => handleSorting("amount")}>Amount</th>
-            <th onClick={(): void => handleSorting("date")}>Date</th>
+            <SortableHeaderCell
+              title="Title"
+              sortKey="title"
+              onSort={handleSorting}
+              isAscending={sortControls.isAscending}
+            />
+            <SortableHeaderCell
+              title="Category"
+              sortKey="category.name"
+              onSort={handleSorting}
+              isAscending={sortControls.isAscending}
+            />
+            <SortableHeaderCell
+              title="Amount"
+              sortKey="amount"
+              onSort={handleSorting}
+              isAscending={sortControls.isAscending}
+            />
+            <SortableHeaderCell
+              title="Date"
+              sortKey="date"
+              onSort={handleSorting}
+              isAscending={sortControls.isAscending}
+            />
             <th>Notes</th>
             <th />
           </tr>
