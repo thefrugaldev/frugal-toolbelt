@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { library, IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-// Styles
-// import "./icon-picker.scss";
 
 interface Props {
   onIconSelection: (icon: IconProp) => void;
