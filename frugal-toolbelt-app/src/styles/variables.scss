@@ -10,13 +10,14 @@
 $font-heading: "Source Sans Pro", serif;
 $font-sans-serif: "Lato", sans-serif;
 // Colors
-$viking: #59dec9;
-$lilac: #ffabab;
-$aquamarine: #91ffef;
-$sherbert: #ffc778;
-$mint: #85ffa7;
-$lavender: #d283db;
+$turquoise: #59dec9;
+$melrose: #bcb6ff;
+$cerise: #f61067;
+$aquamarine: #6decaf;
+$tangerine: #ffae03;
+$silver: #757780;
 $midnight: #001628;
+$sapphire: #22577a;
 
 /********
 *********
@@ -27,11 +28,12 @@ Bulma Overrides
 // Initial
 $family-sans-serif: $font-sans-serif;
 // Derived
-$primary: $viking;
-$info: $lavender;
-$link: $mint;
-$text: $viking;
-$text-strong: $viking;
+$primary: $turquoise;
+$info: $melrose;
+$link: $aquamarine;
+$text: $turquoise;
+$text-strong: $turquoise;
 $scheme-main: $midnight;
+$background: $sapphire;
 // Title
 $title-family: $font-heading;

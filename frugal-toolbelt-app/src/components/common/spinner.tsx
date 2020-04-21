@@ -25,7 +25,7 @@ const Spinner: React.FC = () => {
               height: 100%;
               border-radius: 100%;
               border: 10px solid transparent;
-              border-top-color: $sherbert;
+              border-top-color: $tangerine;
             }
 
             &:before {
