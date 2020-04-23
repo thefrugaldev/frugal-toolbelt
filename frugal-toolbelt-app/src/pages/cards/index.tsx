@@ -1,5 +1,4 @@
 import React from "react";
-import { requireUser } from "../../lib/auth0-spa";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
@@ -25,6 +24,7 @@ const Cards: React.FC = () => {
   return (
     <div className="container">
       <h1>Your current credit cards</h1>
+      <img src="https://creditcards.chase.com/K-Marketplace/images/cardart/freedom_unlimited_card.png" />
       <div className="columns">
         {cards.map((card) => (
           <div className="column" key={card._id}>
@@ -41,4 +41,4 @@ const Cards: React.FC = () => {
   );
 };
 
-export default requireUser(Cards);
+export default Cards;

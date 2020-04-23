@@ -1,6 +1,5 @@
 import React from "react";
 import { toast } from "react-toastify";
-import { requireUser } from "../../lib/auth0-spa";
 import { monthNames } from "../../lib/datetime-helpers";
 import { useQuery, useMutation } from "react-apollo";
 import { GET_LINE_ITEMS_BY_DATE } from "../../graphql/queries";
@@ -72,4 +71,4 @@ const Budget: React.FC = () => {
   );
 };
 
-export default requireUser(Budget);
+export default Budget;

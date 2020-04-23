@@ -1,15 +1,15 @@
 import React from "react";
-import { useAuth0 } from "../../lib/auth0-spa";
 import Link from "next/link";
+import { useFirebase } from "../../lib/firebase/firebase-provider";
+import { toast } from "react-toastify";
 
 const Navbar: React.FunctionComponent = () => {
-  const {
-    isAuthenticated,
-    loginWithRedirect,
-    logout,
-    loading,
-    user,
-  } = useAuth0();
+  const { loading, currentUser, logoutAsync } = useFirebase();
+
+  const handleLogout = async (): Promise<void> => {
+    logoutAsync();
+    toast.success("Logout succesfull");
+  };
 
   return (
     <div className="container">
@@ -61,31 +61,24 @@ const Navbar: React.FunctionComponent = () => {
 
           <div className="navbar-end">
             <div className="navbar-item">
-              {!loading && !isAuthenticated && (
+              {!loading && !currentUser && (
                 <div className="buttons">
-                  <button
-                    className="button is-primary"
-                    onClick={(): void => loginWithRedirect({})}
-                  >
-                    <strong>Sign up</strong>
-                  </button>
-                  <button
-                    className="button is-light"
-                    onClick={(): void => loginWithRedirect({})}
-                  >
-                    Log in
-                  </button>
+                  <Link href="/register">
+                    <a className="button is-primary">Register</a>
+                  </Link>
+                  <Link href="/login">
+                    <a className="button is-primary">Log in</a>
+                  </Link>
                 </div>
               )}
-              {!loading && isAuthenticated && (
+              {!loading && currentUser && (
                 <div>
-                  {user && <span>Welcome {user.nickname}</span>}
+                  {currentUser && (
+                    <span>Welcome {currentUser.displayName}</span>
+                  )}
 
                   <div className="buttons">
-                    <button
-                      className="button is-danger"
-                      onClick={(): void => logout()}
-                    >
+                    <button className="button is-danger" onClick={handleLogout}>
                       Log out
                     </button>
                   </div>
