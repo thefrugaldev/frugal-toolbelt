@@ -1,51 +1,19 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faInfoCircle,
-  faSortUp,
-  faSortDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import LineItem from "../../interfaces/LineItem";
 import { getDisplayFormattedDate } from "../../lib/datetime-helpers";
 import useSort from "../../hooks/use-sort";
+// Components
+import SortableHeaderCell from "../common/sortable-header-cell";
 
-interface LineItemList {
+interface Props {
   lineItems: Array<LineItem>;
   onDeleteClick?: Function;
 }
 
-interface SortableHeaderCellProps {
-  title: string;
-  isAscending: boolean;
-  sortKey: string;
-  onSort: (
-    e: React.MouseEvent<HTMLTableHeaderCellElement, MouseEvent>,
-    sortKey: string
-  ) => void;
-}
-
-const SortableHeaderCell: React.FC<SortableHeaderCellProps> = ({
-  title,
-  isAscending,
-  sortKey,
-  onSort,
-}) => {
-  return (
-    <th onClick={(e): void => onSort(e, sortKey)}>
-      {title}
-      <span className={`icon is-pulled-right ${"is-sorted"}`}>
-        {isAscending ? (
-          <FontAwesomeIcon icon={faSortUp} />
-        ) : (
-          <FontAwesomeIcon icon={faSortDown} />
-        )}
-      </span>
-    </th>
-  );
-};
-
-const LineItemList: React.FC<LineItemList> = ({ lineItems, onDeleteClick }) => {
+const LineItemList: React.FC<Props> = ({ lineItems, onDeleteClick }) => {
   const [activeModal, setActiveModal] = useState(false);
   const [modalTitle, setModalTitle] = useState();
   const [modalBody, setModalBody] = useState();
@@ -55,7 +23,6 @@ const LineItemList: React.FC<LineItemList> = ({ lineItems, onDeleteClick }) => {
     e: React.MouseEvent<HTMLTableHeaderCellElement, MouseEvent>,
     sortKey: string
   ): void => {
-    console.log(e.currentTarget);
     sortControls.setSortKey(sortKey);
     sortControls.toggleAscending();
   };
@@ -89,25 +56,21 @@ const LineItemList: React.FC<LineItemList> = ({ lineItems, onDeleteClick }) => {
               title="Title"
               sortKey="title"
               onSort={handleSorting}
-              isAscending={sortControls.isAscending}
             />
             <SortableHeaderCell
               title="Category"
               sortKey="category.name"
               onSort={handleSorting}
-              isAscending={sortControls.isAscending}
             />
             <SortableHeaderCell
               title="Amount"
               sortKey="amount"
               onSort={handleSorting}
-              isAscending={sortControls.isAscending}
             />
             <SortableHeaderCell
               title="Date"
               sortKey="date"
               onSort={handleSorting}
-              isAscending={sortControls.isAscending}
             />
             <th>Notes</th>
             <th />
