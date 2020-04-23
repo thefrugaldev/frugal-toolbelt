@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { toast } from "react-toastify";
 import { useFirebase } from "../lib/firebase/firebase-provider";
 import { useRouter } from "next/router";
+import AuthForm from "../components/common/forms/auth-form";
 
 const Register: React.FC = () => {
   const email = useRef<HTMLInputElement>();
@@ -9,10 +10,14 @@ const Register: React.FC = () => {
   const router = useRouter();
   const { registerAsync } = useFirebase();
 
-  const handleSubmit = (event): void => {
+  const handleSubmit = (
+    event: React.FormEvent<HTMLFormElement>,
+    email: string,
+    password: string
+  ): void => {
     event.preventDefault();
 
-    registerAsync(email.current.value, password.current.value)
+    registerAsync(email, password)
       .then(() => {
         toast.success("Registration successful");
         router.push("/");
@@ -25,35 +30,7 @@ const Register: React.FC = () => {
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit}>
-        <h1>Register</h1>
-        <div className="control">
-          <input
-            name="name"
-            type="email"
-            ref={email}
-            placeholder="Email"
-            className="input is-primary"
-          />
-        </div>
-
-        <div className="control">
-          <input
-            name="password"
-            type="password"
-            ref={password}
-            placeholder="Password"
-            autoComplete="none"
-            className="input is-primary"
-          />
-        </div>
-
-        <div className="control">
-          <button type="submit" className="button is-link">
-            Submit
-          </button>
-        </div>
-      </form>
+      <AuthForm title="Register" onSubmit={handleSubmit} />
     </div>
   );
 };

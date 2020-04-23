@@ -63,19 +63,17 @@ const Navbar: React.FunctionComponent = () => {
             <div className="navbar-item">
               {!loading && !isAuthenticated && (
                 <div className="buttons">
-                  <Link href="/register">
-                    <a className="button is-primary">Register</a>
-                  </Link>
                   <Link href="/login">
                     <a className="button is-primary">Log in</a>
+                  </Link>
+                  <Link href="/register">
+                    <a className="button is-primary">Register</a>
                   </Link>
                 </div>
               )}
               {!loading && isAuthenticated && (
                 <div>
-                  {currentUser && (
-                    <span>Welcome {currentUser.displayName}</span>
-                  )}
+                  {currentUser && <span>Welcome {currentUser.email}</span>}
 
                   <div className="buttons">
                     <button className="button is-danger" onClick={handleLogout}>
