@@ -23,7 +23,9 @@ const Register: React.FC = () => {
         router.push("/");
       })
       .catch((error) => {
-        toast.error("Registration failed");
+        toast.error(
+          "Registration failed. Please ensure the email address is correctly formatted and provide a password with at least 6 characters."
+        );
         console.error(error);
       });
   };

@@ -21,8 +21,9 @@ const Login: React.FC = () => {
         router.push("/");
       })
       .catch((error) => {
-        toast.error("Login failed");
-        console.error(error);
+        toast.error(
+          "Login failed. Please ensure Email and Password are correct."
+        );
       });
   };
 
