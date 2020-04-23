@@ -4,7 +4,7 @@ import { useFirebase } from "../../lib/firebase/firebase-provider";
 import { toast } from "react-toastify";
 
 const Navbar: React.FunctionComponent = () => {
-  const { loading, currentUser, logoutAsync } = useFirebase();
+  const { loading, isAuthenticated, logoutAsync, currentUser } = useFirebase();
 
   const handleLogout = async (): Promise<void> => {
     logoutAsync();
@@ -61,7 +61,7 @@ const Navbar: React.FunctionComponent = () => {
 
           <div className="navbar-end">
             <div className="navbar-item">
-              {!loading && !currentUser && (
+              {!loading && !isAuthenticated && (
                 <div className="buttons">
                   <Link href="/register">
                     <a className="button is-primary">Register</a>
@@ -71,7 +71,7 @@ const Navbar: React.FunctionComponent = () => {
                   </Link>
                 </div>
               )}
-              {!loading && currentUser && (
+              {!loading && isAuthenticated && (
                 <div>
                   {currentUser && (
                     <span>Welcome {currentUser.displayName}</span>

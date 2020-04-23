@@ -8,7 +8,7 @@ interface FirebaseProviderProps {
 }
 
 interface FirebaseContextProps {
-  //   isAuthenticated: boolean;
+  isAuthenticated: boolean;
   currentUser: fb.User;
   loading: boolean;
   message: string;
@@ -34,21 +34,28 @@ export const FirebaseProvider: React.FC<FirebaseProviderProps> = ({
   children,
   defaultMessage,
 }) => {
-  //   const [isAuthenticated, setIsAuthenticated] = useState<boolean>();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>();
   const [currentUser, setCurrentUser] = useState<fb.User>();
-  const [loading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     auth.onAuthStateChanged((user): void => {
-      user && setCurrentUser(user);
+      if (user) {
+        setCurrentUser(user);
+        setIsAuthenticated(true);
+        setLoading(false);
+      } else {
+        setIsAuthenticated(false);
+        setLoading(false);
+      }
     });
-  });
+  }, []);
 
   return (
     <FirebaseContext.Provider
       value={{
-        // isAuthenticated,
+        isAuthenticated,
         currentUser,
         loading,
         message,
