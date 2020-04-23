@@ -10,7 +10,7 @@ import "../styles/bulma-override.scss";
 import "react-toastify/dist/ReactToastify.css";
 import "flatpickr/dist/flatpickr.min.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { FirebaseProvider } from "../lib/firebase/firebase-provider";
+import FirebaseProvider from "../lib/firebase/firebase-provider";
 
 export default class FrugalToolbeltApp extends App {
   render(): JSX.Element {

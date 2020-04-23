@@ -4,6 +4,7 @@ import { GET_LINE_ITEMS_BY_DATE } from "../../../graphql/queries";
 // Components
 import Spinner from "../../../components/common/spinner";
 import SelectInput from "../../../components/common/forms/select-input";
+import withRequireUser from "../../../components/common/with-require-user";
 
 interface Props {
   year: number;
@@ -63,4 +64,4 @@ const ReportsPage: React.FC<Props> = ({ year = new Date().getFullYear() }) => {
   );
 };
 
-export default ReportsPage;
+export default withRequireUser(ReportsPage);

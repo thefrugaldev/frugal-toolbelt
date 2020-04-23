@@ -10,6 +10,7 @@ import IconPicker from "../../components/common/icon-picker";
 //Interfaces
 import Category, { NewCategory } from "../../interfaces/Category";
 import { toast } from "react-toastify";
+import withRequireUser from "../../components/common/with-require-user";
 
 const ManageCategoriesPage: React.FC = () => {
   const [category, setCategory] = useState<Category>(NewCategory);
@@ -139,4 +140,4 @@ const ManageCategoriesPage: React.FC = () => {
   );
 };
 
-export default ManageCategoriesPage;
+export default withRequireUser(ManageCategoriesPage);

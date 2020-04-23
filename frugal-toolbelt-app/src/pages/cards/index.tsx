@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import withRequireUser from "../../components/common/with-require-user";
 
 const GET_CARDS = gql`
   query getCards {
@@ -41,4 +42,4 @@ const Cards: React.FC = () => {
   );
 };
 
-export default Cards;
+export default withRequireUser(Cards);

@@ -6,6 +6,7 @@ import { UPSERT_LINE_ITEM } from "../../../graphql/mutations";
 import { useRouter } from "next/router";
 // Components
 import LineItemForm from "../../../components/budget/line-item-form";
+import withRequireUser from "../../../components/common/with-require-user";
 // Interfaces
 import LineItem, { NewLineItem } from "../../../interfaces/LineItem";
 
@@ -102,4 +103,4 @@ const LineItemPage: React.FC<{ id: string }> = ({ id }) => {
   );
 };
 
-export default LineItemPage;
+export default withRequireUser(LineItemPage);

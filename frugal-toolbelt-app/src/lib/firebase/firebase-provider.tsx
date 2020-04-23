@@ -30,7 +30,7 @@ const FirebaseContext = React.createContext<FirebaseContextProps>(null);
 export const useFirebase = (): FirebaseContextProps =>
   React.useContext(FirebaseContext);
 
-export const FirebaseProvider: React.FC<FirebaseProviderProps> = ({
+const FirebaseProvider: React.FC<FirebaseProviderProps> = ({
   children,
   defaultMessage,
 }) => {
@@ -81,3 +81,5 @@ export const FirebaseProvider: React.FC<FirebaseProviderProps> = ({
     </FirebaseContext.Provider>
   );
 };
+
+export default FirebaseProvider;

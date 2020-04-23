@@ -8,6 +8,7 @@ import LineItemList from "../../components/budget/line-item-list";
 import BudgetPageFooter from "../../components/budget/footer";
 import { DELETE_LINE_ITEM } from "../../graphql/mutations";
 import Spinner from "../../components/common/spinner";
+import withRequireUser from "../../components/common/with-require-user";
 // Interfaces
 import LineItem from "../../interfaces/LineItem";
 
@@ -71,4 +72,4 @@ const Budget: React.FC = () => {
   );
 };
 
-export default Budget;
+export default withRequireUser(Budget);
