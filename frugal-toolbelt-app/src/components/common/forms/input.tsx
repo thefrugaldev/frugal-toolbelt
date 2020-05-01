@@ -18,7 +18,7 @@ const Input: FC<Props> = ({
   onChange,
   placeholder,
   value,
-  error
+  error,
 }) => {
   let inputClass = "input";
   if (error && error.length > 0) {

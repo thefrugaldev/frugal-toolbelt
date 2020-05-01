@@ -19,7 +19,7 @@ const Budget: React.FC = () => {
   const [selectedYear] = React.useState(new Date().getFullYear());
 
   const [deleteLineItem] = useMutation(DELETE_LINE_ITEM);
-  const { loading, data, refetch } = useQuery(GET_LINE_ITEMS_BY_DATE, {
+  const { error, loading, data, refetch } = useQuery(GET_LINE_ITEMS_BY_DATE, {
     variables: { month: selectedMonth, year: selectedYear },
   });
 
@@ -39,6 +39,12 @@ const Budget: React.FC = () => {
     }
   };
 
+  if (loading) return <Spinner />;
+  if (error)
+    return (
+      <h2 className="title is-2 has-text-centered">Error loading budget.</h2>
+    );
+
   return (
     <div className="container">
       <h2 className="title">{selectedYear} Budgets</h2>
@@ -55,17 +61,13 @@ const Budget: React.FC = () => {
           ))}
         </ul>
       </div>
-      {!loading ? (
+      {data && (
         <>
           <LineItemList
             onDeleteClick={handleDeleteLineItemAsync}
             lineItems={data.filterLineItemsByDate}
           />
           <BudgetPageFooter />
-        </>
-      ) : (
-        <>
-          <Spinner />
         </>
       )}
     </div>

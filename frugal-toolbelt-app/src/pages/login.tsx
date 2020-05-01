@@ -16,8 +16,11 @@ const Login: React.FC = () => {
     event.preventDefault();
 
     loginAsync(email, password)
-      .then(() => {
+      .then((userCredential) => {
         toast.success("Login successful");
+        if (!userCredential.user.emailVerified) {
+          router.push("/profile");
+        }
         router.push("/");
       })
       .catch((error) => {

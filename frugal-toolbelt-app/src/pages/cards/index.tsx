@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import withRequireUser from "../../components/common/with-require-user";
+import Spinner from "../../components/common/spinner";
 
 const GET_CARDS = gql`
   query getCards {
@@ -17,8 +18,13 @@ const GET_CARDS = gql`
 const Cards: React.FC = () => {
   const { loading, error, data } = useQuery(GET_CARDS);
 
-  if (loading) return <h1>Loading...</h1>;
-  if (error) return <h1>Error! {error.message}</h1>;
+  if (loading) return <Spinner />;
+  if (error)
+    return (
+      <h1 className="title is-1 has-text-centered">
+        Error loading credit cards
+      </h1>
+    );
 
   const { cards } = data;
 
