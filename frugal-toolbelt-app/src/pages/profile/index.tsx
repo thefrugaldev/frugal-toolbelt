@@ -14,10 +14,7 @@ const Profile: React.FC = () => {
     console.log(`currentUser was updated`);
   }, [currentUser]);
 
-  const confirmUpdate = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    email: string
-  ) => {
+  const confirmUpdate = async (email: string): Promise<void> => {
     setIsUpdating(true);
     try {
       console.log(`Updating email`);
@@ -29,9 +26,7 @@ const Profile: React.FC = () => {
     }
   };
 
-  const confirmDeletion = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void => {
+  const confirmDeletion = (): void => {
     //modal popup to confirm deletion
   };
 
@@ -43,13 +38,13 @@ const Profile: React.FC = () => {
           <Input
             name="email"
             type="text"
-            onChange={(e) => setEmail(e.currentTarget.value)}
+            onChange={(e): void => setEmail(e.currentTarget.value)}
             value={email}
           />
         </div>
         <div className="control">
           <button
-            onClick={(e) => confirmUpdate(e, currentUser.email)}
+            onClick={(): Promise<void> => confirmUpdate(currentUser.email)}
             className={`button is-info ${isUpdating && "is-loading"}`}
             disabled={email === currentUser.email ? true : null}
           >

@@ -1,12 +1,10 @@
-import React, { useRef } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 import { useFirebase } from "../lib/firebase/firebase-provider";
 import { useRouter } from "next/router";
 import AuthForm from "../components/common/forms/auth-form";
 
 const Register: React.FC = () => {
-  const email = useRef<HTMLInputElement>();
-  const password = useRef<HTMLInputElement>();
   const router = useRouter();
   const { registerAsync } = useFirebase();
 

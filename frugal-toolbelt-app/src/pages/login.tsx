@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { useFirebase } from "../lib/firebase/firebase-provider";
@@ -23,7 +23,7 @@ const Login: React.FC = () => {
         }
         router.push("/");
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error(
           "Login failed. Please ensure Email and Password are correct."
         );

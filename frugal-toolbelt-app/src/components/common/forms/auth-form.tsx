@@ -15,7 +15,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ title, onSubmit }) => {
 
   return (
     <form
-      onSubmit={(e) => onSubmit(e, email.current.value, password.current.value)}
+      onSubmit={(e): void =>
+        onSubmit(e, email.current.value, password.current.value)
+      }
     >
       <h1>{title}</h1>
       <div className="control">

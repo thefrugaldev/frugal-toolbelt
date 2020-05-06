@@ -4,9 +4,6 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useQuery, useMutation } from "react-apollo";
 import { GET_CATEGORIES } from "../../graphql/queries";
 import { CREATE_CATEGORY, DELETE_CATEGORY } from "../../graphql/mutations";
-// Components
-import Input from "../../components/common/forms/input";
-import IconPicker from "../../components/common/icon-picker";
 //Interfaces
 import Category, { NewCategory } from "../../interfaces/Category";
 import { toast } from "react-toastify";
