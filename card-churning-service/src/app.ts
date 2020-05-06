@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import express from "express";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
@@ -39,6 +40,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+dotenv.config();
 db.initialize();
 
 // TODO: Use api prefix?

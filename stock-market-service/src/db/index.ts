@@ -9,9 +9,6 @@ export const initialize = () => {
     connectTimeoutMS: 10000,
   };
 
-  // tslint:disable-next-line:no-console
-  console.log("👌 ✅ 👌 ✅ 👌 ✅ 👌 ✅ → URI: ", process.env);
-
   mongoose
     .connect(MONGO_DB_URI, options)
     .then(() => {

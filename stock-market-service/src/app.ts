@@ -1,9 +1,11 @@
+import dotenv from "dotenv";
 import express from "express";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import * as routes from "./routes";
 import * as db from "./db";
 import * as errorHandlers from "./helpers/error-handlers";
+import * as tradierClient from "./tradier/tradier-client";
 
 const app = express();
 const isDevelopment = app.get("env") === "development";
@@ -39,6 +41,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+dotenv.config();
+tradierClient.initialize();
 db.initialize();
 
 routes.register(app);
