@@ -4,3 +4,4 @@ node_modules
 .next/
 out/
 dist/
+firebase-service-account-file.json

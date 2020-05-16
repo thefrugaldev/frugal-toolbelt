@@ -1,5 +1,6 @@
 import LineItem from "../interfaces/LineItem";
 import LineItemService from "../adapters/line-item-service";
+import ApolloContext from "../interfaces/ApolloContext";
 
 export const resolvers = {
   Query: {
@@ -11,7 +12,8 @@ export const resolvers = {
     },
     filterLineItemsByDate: async (
       root: any,
-      args: { day: string; month: string; year: string }
+      args: { day: string; month: string; year: string },
+      ctx: ApolloContext
     ) => {
       return await LineItemService.fetchLineItemsAsync(args);
     },
