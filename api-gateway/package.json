@@ -13,7 +13,7 @@
     "dev": "nodemon --watch src --ext ts --exec yarn run dev:start"
   },
   "dependencies": {
-    "apollo-server": "^2.11.0",
+    "apollo-server": "^2.14.2",
     "apollo-server-express": "^2.11.0",
     "axios": "^0.19.2",
     "cookie-parser": "^1.4.5",
